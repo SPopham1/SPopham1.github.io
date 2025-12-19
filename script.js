@@ -1,17 +1,23 @@
 const root = document.documentElement;
 const toggle = document.getElementById("themeToggle");
 
-// Check if theme is stored in memory (not localStorage)
+// Store theme preference in memory (not localStorage for artifact compatibility)
 let currentTheme = null;
 
-// Check system preference on load
-if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-  root.setAttribute("data-theme", "dark");
-  toggle.checked = true;
-  currentTheme = "dark";
+// Initialize theme based on system preference
+function initTheme() {
+  if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    root.setAttribute("data-theme", "dark");
+    toggle.checked = true;
+    currentTheme = "dark";
+  } else {
+    root.removeAttribute("data-theme");
+    toggle.checked = false;
+    currentTheme = "light";
+  }
 }
 
-// Toggle theme function
+// Toggle theme when checkbox changes
 toggle.addEventListener("change", function () {
   if (this.checked) {
     root.setAttribute("data-theme", "dark");
@@ -26,7 +32,8 @@ toggle.addEventListener("change", function () {
 window
   .matchMedia("(prefers-color-scheme: dark)")
   .addEventListener("change", (e) => {
-    if (!currentTheme) {
+    // Only auto-update if user hasn't manually set a preference
+    if (!currentTheme || currentTheme === "system") {
       if (e.matches) {
         root.setAttribute("data-theme", "dark");
         toggle.checked = true;
@@ -36,3 +43,6 @@ window
       }
     }
   });
+
+// Initialize on page load
+initTheme();
