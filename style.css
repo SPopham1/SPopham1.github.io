@@ -1,14 +1,11 @@
 /* ---------- THEME VARIABLES ---------- */
-
 :root {
   /* Light mode */
   --bg: #f9fafb;
   --card-bg: #ffffff;
   --border: #e5e7eb;
-
   --text-main: #111827;
   --text-muted: #4b5563;
-
   --accent: #2563eb;
   --accent-hover: #1d4ed8;
 }
@@ -17,15 +14,16 @@
   --bg: #0f172a;
   --card-bg: #1e293b;
   --border: #334155;
-
   --text-main: #f8fafc;
   --text-muted: #cbd5e1;
-
   --accent: #3b82f6;
   --accent-hover: #60a5fa;
 }
 
 /* ---------- GLOBAL STYLES ---------- */
+* {
+  box-sizing: border-box;
+}
 
 body {
   font-family: Arial, sans-serif;
@@ -40,6 +38,7 @@ header {
   border-bottom: 1px solid var(--border);
   padding: 40px;
   text-align: center;
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 section {
@@ -51,6 +50,7 @@ section {
 h2 {
   border-bottom: 2px solid var(--border);
   padding-bottom: 5px;
+  transition: border-color 0.3s ease;
 }
 
 .project {
@@ -59,13 +59,29 @@ h2 {
   margin: 15px 0;
   border-radius: 6px;
   border: 1px solid var(--border);
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.project:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.project h3 {
+  margin-top: 0;
+}
+
+.project-meta {
+  color: var(--text-muted);
+  font-size: 0.9em;
+  margin: 8px 0;
 }
 
 a {
   color: var(--accent);
   text-decoration: none;
   font-weight: bold;
+  transition: color 0.2s ease;
 }
 
 a:hover {
@@ -78,10 +94,10 @@ footer {
   background: var(--card-bg);
   border-top: 1px solid var(--border);
   color: var(--text-muted);
+  transition: all 0.3s ease;
 }
 
 /* ---------- TOGGLE BUTTON ---------- */
-
 .theme-switch {
   position: fixed;
   top: 20px;

@@ -2,12 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sam Popham | Portfolio</title>
-    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <label class="theme-switch">
-      <input type="checkbox" id="themeToggle" onchange="toggleTheme()" />
+      <input type="checkbox" id="themeToggle" />
       <span class="slider"></span>
     </label>
 
@@ -29,23 +29,41 @@
       <h2>Projects</h2>
 
       <div class="project">
-        <h3>Tic-Tac-Toe (Java Backend)</h3>
-        <p>Multiplayer game with a REST API backend written in Java.</p>
-        <a href="#">View Project</a>
-      </div>
-
-      <div class="project">
-        <h3>Mental Health App</h3>
-        <p>Python + Qt app that tracks mood data using a calendar interface.</p>
-        <a href="#">View Project</a>
-      </div>
-
-      <div class="project">
-        <h3>Arduino Games & Systems</h3>
+        <h3>Chess Bot</h3>
         <p>
-          Multiple hardware projects using Arduino, LCDs, sensors, and servos.
+          Python chess bot using the chess library for move generation and game
+          logic.
         </p>
-        <a href="#">View Project</a>
+        <div class="project-meta">Language: Python</div>
+        <a href="https://github.com/SPopham1/chessbot" target="_blank"
+          >View Project</a
+        >
+      </div>
+
+      <div class="project">
+        <h3>Python Weather App</h3>
+        <p>
+          Simple weather application built with Python for checking current
+          weather conditions.
+        </p>
+        <div class="project-meta">Language: Python</div>
+        <a href="https://github.com/SPopham1/python-weather-app" target="_blank"
+          >View Project</a
+        >
+      </div>
+
+      <div class="project">
+        <h3>Raytracing in One Weekend</h3>
+        <p>
+          Following the tutorial from "Ray Tracing in One Weekend" book series
+          to build a raytracer from scratch.
+        </p>
+        <div class="project-meta">Language: C</div>
+        <a
+          href="https://github.com/SPopham1/Raytracing-in-one-weekend-fork"
+          target="_blank"
+          >View Project</a
+        >
       </div>
     </section>
 
@@ -63,7 +81,5 @@
     <footer>
       <p>© 2025 Sam Popham</p>
     </footer>
-
-    <script src="script.js"></script>
   </body>
 </html>
