@@ -9,6 +9,7 @@
   --text-muted: #4b5563;
   --accent: #2563eb;
   --accent-hover: #1d4ed8;
+  --canvas-bg: #1a1f1f;
 }
 
 [data-theme="dark"] {
@@ -19,6 +20,7 @@
   --text-muted: #cbd5e1;
   --accent: #3b82f6;
   --accent-hover: #60a5fa;
+  --canvas-bg: #0a0f0f;
 }
 
 /* ---------- GLOBAL STYLES ---------- */
@@ -71,6 +73,53 @@ h2 {
   transition: border-color 0.3s ease;
 }
 
+/* ---------- DEMO CONTAINER ---------- */
+
+.demo-container {
+  background: var(--card-bg);
+  padding: 25px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  margin: 25px 0;
+  transition: all 0.3s ease;
+}
+
+.demo-description {
+  margin: 0 0 20px 0;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.canvas-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--canvas-bg);
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0;
+}
+
+#glcanvas {
+  border: 2px solid var(--border);
+  border-radius: 4px;
+  cursor: crosshair;
+  display: block;
+}
+
+.demo-tech {
+  margin: 15px 0 0 0;
+  font-size: 0.9em;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.demo-tech strong {
+  color: var(--accent);
+}
+
+/* ---------- PROJECT CARDS ---------- */
+
 .project {
   background: var(--card-bg);
   padding: 20px;
@@ -102,6 +151,8 @@ h2 {
   margin: 12px 0;
   font-style: italic;
 }
+
+/* ---------- SKILLS GRID ---------- */
 
 .skills-grid {
   display: grid;
@@ -211,5 +262,14 @@ input:checked + .slider::before {
 
   .skills-grid {
     grid-template-columns: 1fr;
+  }
+
+  #glcanvas {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .canvas-wrapper {
+    padding: 10px;
   }
 }

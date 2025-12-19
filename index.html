@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sam Popham | Portfolio</title>
     <link rel="stylesheet" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js"></script>
   </head>
   <body>
     <label class="theme-switch">
@@ -28,9 +29,30 @@
         technical problem-solving with creative thinking.
       </p>
       <p>
-        Currently achieving first-class grades and expanding my expertise in
-        machine learning, visual computing, and advanced algorithms.
+        Currently achieving first-class grades (69.3% average) and expanding my
+        expertise in machine learning, visual computing, and advanced
+        algorithms.
       </p>
+    </section>
+
+    <section>
+      <h2>Interactive Demo: Bézier Curve Visualizer</h2>
+      <div class="demo-container">
+        <p class="demo-description">
+          Drag the green control points to interactively modify the Bézier
+          curve. This WebGL-based visualizer demonstrates parametric curve
+          mathematics and real-time rendering.
+        </p>
+        <div class="canvas-wrapper">
+          <canvas id="glcanvas"
+            >Your browser doesn't support HTML5 canvas.</canvas
+          >
+        </div>
+        <p class="demo-tech">
+          <strong>Technologies:</strong> WebGL, GLSL Shaders, JavaScript,
+          gl-matrix
+        </p>
+      </div>
     </section>
 
     <section>
@@ -65,25 +87,11 @@
       </div>
 
       <div class="project">
-        <h3>Mobile Physical Shutoff Alarm App</h3>
-        <p>
-          Contributed to an Android application featuring alarms, notifications,
-          local persistence, and machine learning for activity verification
-          using human pose detection. Built with modular, clean architecture.
-        </p>
-        <div class="project-meta">Language: Flutter/Dart • Group Project</div>
-        <a
-          href="https://github.com/Gabriel-Michael-16/SWE-Project-Alarm"
-          target="_blank"
-          >View Project</a
-        >
-      </div>
-
-      <div class="project">
         <h3>WebGL Bézier Curve Visualiser</h3>
         <p>
           Interactive Bézier curve rendering with real-time visual output,
-          applying vector mathematics and parametric curve equations.
+          applying vector mathematics and parametric curve equations. Try it in
+          the demo above!
         </p>
         <div class="project-meta">Language: JavaScript, WebGL</div>
         <a
@@ -91,6 +99,16 @@
           target="_blank"
           >View Project</a
         >
+      </div>
+
+      <div class="project">
+        <h3>Mobile Physical Shutoff Alarm App</h3>
+        <p>
+          Contributed to an Android application featuring alarms, notifications,
+          local persistence, and machine learning for activity verification
+          using human pose detection. Built with modular, clean architecture.
+        </p>
+        <div class="project-meta">Language: Flutter/Dart • Group Project</div>
       </div>
 
       <div class="project">
@@ -142,6 +160,7 @@
       <p>© 2025 Sam Popham</p>
     </footer>
 
+    <script src="bezier.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
