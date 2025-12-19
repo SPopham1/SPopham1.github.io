@@ -6,7 +6,10 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <button class="theme-toggle" onclick="toggleTheme()">Toggle theme</button>
+    <label class="theme-switch">
+      <input type="checkbox" id="themeToggle" onchange="toggleTheme()" />
+      <span class="slider"></span>
+    </label>
 
     <header>
       <h1>Sam Popham</h1>
