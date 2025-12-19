@@ -2,10 +2,10 @@
 
 var canvas;
 var gl;
-var mMatrix = glMatrix.mat4.create();
-var vMatrix = glMatrix.mat4.create();
-var mvMatrix = glMatrix.mat4.create();
-var pMatrix = glMatrix.mat4.create();
+var mMatrix;
+var vMatrix;
+var mvMatrix;
+var pMatrix;
 var shaderProgram;
 
 function resize() {
@@ -28,6 +28,11 @@ function resize() {
 
 function init() {
   canvas = document.getElementById("glcanvas");
+
+  mMatrix = glMatrix.mat4.create();
+  vMatrix = glMatrix.mat4.create();
+  mvMatrix = glMatrix.mat4.create();
+  pMatrix = glMatrix.mat4.create();
 
   try {
     gl = canvas.getContext("webgl");

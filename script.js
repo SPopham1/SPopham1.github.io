@@ -44,5 +44,11 @@ window
     }
   });
 
+window.onLoad = function () {
+  if (init()) {
+    draw();
+  }
+};
+
 // Initialize on page load
 initTheme();
