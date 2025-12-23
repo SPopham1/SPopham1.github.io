@@ -93,14 +93,23 @@ h2 {
   transition: border-color 0.3s ease;
 }
 
-.nav {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  padding: 12px;
-  font-size: 0.95rem;
+.nav a {
   position: relative;
-  z-index: 2;
+}
+
+.nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  transition: width 0.2s ease;
+}
+
+.nav a:hover::after {
+  width: 100%;
 }
 
 .nav a {
