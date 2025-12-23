@@ -8,7 +8,7 @@ if (!gl) {
 let aspect = window.innerWidth / window.innerHeight;
 let isDark = true;
 const particles = [];
-const numParticles = 500;
+const numParticles = 150;
 let mouseX = 0;
 let mouseY = 0;
 let time = 0;
@@ -32,59 +32,109 @@ document.addEventListener("mousemove", (e) => {
   mouseY = -((e.clientY / window.innerHeight) * 2 - 1);
 });
 
-class Particle {
+class Boid {
   constructor() {
-    this.reset();
-  }
-
-  reset() {
     this.x = Math.random() * 2 - 1;
     this.y = Math.random() * 2 - 1;
-    this.vx = (Math.random() - 0.5) * 0.01;
-    this.vy = (Math.random() - 0.5) * 0.01;
+    const angle = Math.random() * Math.PI * 2;
+    const speed = 0.005;
+    this.vx = Math.cos(angle) * speed;
+    this.vy = Math.sin(angle) * speed;
     this.size = (Math.random() * 6 + 2) * (window.devicePixelRatio || 1);
     this.life = Math.random();
   }
 
-  update(scale = 1, dt = 0.016) {
+  update(boids, scale = 1) {
+    const perception = 0.15;
+    const separationDist = 0.05;
+
+    let sepX = 0,
+      sepY = 0;
+    let alignX = 0,
+      alignY = 0;
+    let cohX = 0,
+      cohY = 0;
+    let sepCount = 0,
+      alignCount = 0,
+      cohCount = 0;
+
+    for (let other of boids) {
+      if (other === this) continue;
+      const dx = other.x - this.x;
+      const dy = other.y - this.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist > 0 && dist < perception) {
+        if (dist < separationDist) {
+          sepX -= dx / dist;
+          sepY -= dy / dist;
+          sepCount++;
+        }
+        alignX += other.vx;
+        alignY += other.vy;
+        alignCount++;
+        cohX += other.x;
+        cohY += other.y;
+        cohCount++;
+      }
+    }
+
+    if (sepCount > 0) {
+      sepX /= sepCount;
+      sepY /= sepCount;
+      this.vx += sepX * 0.0015 * scale;
+      this.vy += sepY * 0.0015 * scale;
+    }
+
+    if (alignCount > 0) {
+      alignX /= alignCount;
+      alignY /= alignCount;
+      this.vx += (alignX - this.vx) * 0.05 * scale;
+      this.vy += (alignY - this.vy) * 0.05 * scale;
+    }
+
+    if (cohCount > 0) {
+      cohX /= cohCount;
+      cohY /= cohCount;
+      const cohDx = cohX - this.x;
+      const cohDy = cohY - this.y;
+      this.vx += cohDx * 0.0003 * scale;
+      this.vy += cohDy * 0.0003 * scale;
+    }
+
+    // Mouse interaction: avoid cursor
     const dx = mouseX - this.x;
     const dy = mouseY - this.y;
     const dist = Math.sqrt(dx * dx + dy * dy);
-
-    if (dist < 0.3) {
-      const force = (0.3 - dist) * 0.0001;
-      this.vx += dx * force * scale;
-      this.vy += dy * force * scale;
+    if (dist < 0.25 && dist > 0) {
+      const avoidForce = (0.25 - dist) * 0.0008;
+      this.vx -= (dx / dist) * avoidForce * scale;
+      this.vy -= (dy / dist) * avoidForce * scale;
     }
 
-    // noise (time is in seconds)
-    const angle = Math.sin(this.y * 3.0 + time) + Math.cos(this.x * 3.0 - time);
+    // Limit speed
+    const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+    const maxSpeed = 0.01;
+    if (speed > maxSpeed) {
+      this.vx = (this.vx / speed) * maxSpeed;
+      this.vy = (this.vy / speed) * maxSpeed;
+    }
 
-    this.vx += Math.cos(angle) * 0.0004 * scale;
-    this.vy += Math.sin(angle) * 0.0004 * scale;
-
-    // damping (apply per-frame scale)
-    const damp = Math.pow(0.98, scale);
-    this.vx *= damp;
-    this.vy *= damp;
-    this.vx += -this.x * 0.00005 * scale;
-    this.vy += -this.y * 0.00005 * scale;
-
-    // integrate
+    // Boundary wrapping
     this.x += (this.vx / aspect) * scale;
     this.y += this.vy * scale;
 
+    if (this.x < -1.1) this.x = 1.1;
+    if (this.x > 1.1) this.x = -1.1;
+    if (this.y < -1.1) this.y = 1.1;
+    if (this.y > 1.1) this.y = -1.1;
+
     this.life += 0.002 * scale;
     if (this.life > 1) this.life = 0;
-
-    if (this.x < -1.1 || this.x > 1.1 || this.y < -1.1 || this.y > 1.1) {
-      this.reset();
-    }
   }
 }
 
 for (let i = 0; i < numParticles; i++) {
-  particles.push(new Particle());
+  particles.push(new Boid());
 }
 
 const vsSource = `
@@ -95,8 +145,7 @@ const vsSource = `
   
   void main() {
     gl_Position = vec4(aPosition, 0.0, 1.0);
-    gl_PointSize = aSize * 1.5;
-    // increase point size multiplier for better visibility
+    // set point size multiplier for better visibility
     gl_PointSize = aSize * 4.0;
     vLife = aLife;
   }
@@ -183,7 +232,7 @@ function renderParticles(timestamp) {
   const lives = [];
 
   particles.forEach((p) => {
-    p.update(scale, dt);
+    p.update(particles, scale);
     positions.push(p.x, p.y);
     sizes.push(p.size);
     lives.push(p.life);
