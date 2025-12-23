@@ -197,10 +197,6 @@ h2 {
   transition: background 0.2s ease;
 }
 
-.project a:hover {
-  background: var(--accent-hover);
-}
-
 .project p {
   margin: 10px 0;
   color: var(--text-muted);
@@ -346,13 +342,13 @@ body {
 
 header {
   position: relative;
-  background: rgba(255, 255, 255, 0.85) !important;
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(10px);
   z-index: 1;
 }
 
 [data-theme="dark"] header {
-  background: rgba(30, 41, 59, 0.85) !important;
+  background: rgba(30, 41, 59, 0.85);
 }
 
 .nav {
@@ -360,36 +356,31 @@ header {
   z-index: 2;
 }
 
-section {
-  position: relative;
-  z-index: 1;
-}
-
 .project {
-  background: rgba(255, 255, 255, 0.9) !important;
+  background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(10px);
 }
 
 [data-theme="dark"] .project {
-  background: rgba(30, 41, 59, 0.9) !important;
+  background: rgba(30, 41, 59, 0.9);
 }
 
 .skill-category {
-  background: rgba(255, 255, 255, 0.9) !important;
+  background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(10px);
 }
 
 [data-theme="dark"] .skill-category {
-  background: rgba(30, 41, 59, 0.9) !important;
+  background: rgba(30, 41, 59, 0.9);
 }
 
 footer {
   position: relative;
-  background: rgba(255, 255, 255, 0.85) !important;
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(10px);
   z-index: 1;
 }
 
 [data-theme="dark"] footer {
-  background: rgba(30, 41, 59, 0.85) !important;
+  background: rgba(30, 41, 59, 0.85);
 }
