@@ -335,20 +335,24 @@ input:checked + .slider::before {
   pointer-events: none;
 }
 
-/* Update existing elements to have transparency and z-index */
 body {
   position: relative;
 }
 
 header {
   position: relative;
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(10px);
   z-index: 1;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 [data-theme="dark"] header {
-  background: rgba(30, 41, 59, 0.85);
+  background: rgba(30, 41, 59, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .nav {
@@ -356,31 +360,22 @@ header {
   z-index: 2;
 }
 
-.project {
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(10px);
-}
-
-[data-theme="dark"] .project {
-  background: rgba(30, 41, 59, 0.9);
-}
-
-.skill-category {
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(10px);
-}
-
-[data-theme="dark"] .skill-category {
-  background: rgba(30, 41, 59, 0.9);
-}
-
+.project,
+.skill-category,
 footer {
   position: relative;
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(10px);
   z-index: 1;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
 }
 
+[data-theme="dark"] .project,
+[data-theme="dark"] .skill-category,
 [data-theme="dark"] footer {
-  background: rgba(30, 41, 59, 0.85);
+  background: rgba(30, 41, 59, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
