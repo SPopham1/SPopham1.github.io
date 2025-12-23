@@ -7,7 +7,7 @@ if (!gl) {
 
 let isDark = false;
 const particles = [];
-const numParticles = 150;
+const numParticles = 500;
 let mouseX = 0;
 let mouseY = 0;
 let time = 0;
