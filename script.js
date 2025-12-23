@@ -12,11 +12,13 @@ const numParticles = 500;
 let mouseX = 0;
 let mouseY = 0;
 let time = 0;
+let lastTime = null;
 
 function resizeCanvas() {
   const dpr = window.devicePixelRatio || 1;
   canvas.width = window.innerWidth * dpr;
   canvas.height = window.innerHeight * dpr;
+  aspect = canvas.width / canvas.height;
   canvas.style.width = window.innerWidth + "px";
   canvas.style.height = window.innerHeight + "px";
   gl.viewport(0, 0, canvas.width, canvas.height);
@@ -38,41 +40,41 @@ class Particle {
   reset() {
     this.x = Math.random() * 2 - 1;
     this.y = Math.random() * 2 - 1;
-    this.vx = (Math.random() - 0.5) * 0.002;
-    this.vy = (Math.random() - 0.5) * 0.002;
-    this.size = Math.random() * 4 + 2;
+    this.vx = (Math.random() - 0.5) * 0.01;
+    this.vy = (Math.random() - 0.5) * 0.01;
+    this.size = (Math.random() * 2 + 1) * (window.devicePixelRatio || 1);
     this.life = Math.random();
   }
 
-  update() {
+  update(scale = 1, dt = 0.016) {
     const dx = mouseX - this.x;
     const dy = mouseY - this.y;
     const dist = Math.sqrt(dx * dx + dy * dy);
 
     if (dist < 0.3) {
       const force = (0.3 - dist) * 0.0001;
-      this.vx += dx * force;
-      this.vy += dy * force;
+      this.vx += dx * force * scale;
+      this.vy += dy * force * scale;
     }
 
-    // noise
+    // noise (time is in seconds)
     const angle = Math.sin(this.y * 3.0 + time) + Math.cos(this.x * 3.0 - time);
 
-    this.vx += Math.cos(angle) * 0.0004;
-    this.vy += Math.sin(angle) * 0.0004;
+    this.vx += Math.cos(angle) * 0.0004 * scale;
+    this.vy += Math.sin(angle) * 0.0004 * scale;
 
-    // damping
-    this.vx *= 0.98;
-    this.vy *= 0.98;
-
-    this.vx += -this.x * 0.00005;
-    this.vy += -this.y * 0.00005;
+    // damping (apply per-frame scale)
+    const damp = Math.pow(0.98, scale);
+    this.vx *= damp;
+    this.vy *= damp;
+    this.vx += -this.x * 0.00005 * scale;
+    this.vy += -this.y * 0.00005 * scale;
 
     // integrate
-    this.x += this.vx / aspect;
-    this.y += this.vy;
+    this.x += (this.vx / aspect) * scale;
+    this.y += this.vy * scale;
 
-    this.life += 0.002;
+    this.life += 0.002 * scale;
     if (this.life > 1) this.life = 0;
 
     if (this.x < -1.1 || this.x > 1.1 || this.y < -1.1 || this.y > 1.1) {
@@ -129,10 +131,18 @@ function createShader(gl, type, source) {
 const vertexShader = createShader(gl, gl.VERTEX_SHADER, vsSource);
 const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fsSource);
 
+if (!vertexShader || !fragmentShader) {
+  console.error("Shader compilation failed, aborting WebGL setup.");
+  throw new Error("Shader compilation failed");
+}
+
 const program = gl.createProgram();
 gl.attachShader(program, vertexShader);
 gl.attachShader(program, fragmentShader);
 gl.linkProgram(program);
+if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+  console.error("Program link error:", gl.getProgramInfoLog(program));
+}
 gl.useProgram(program);
 
 const positionBuffer = gl.createBuffer();
@@ -151,15 +161,24 @@ gl.enableVertexAttribArray(aLife);
 gl.enable(gl.BLEND);
 gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
-function renderParticles() {
-  time += 0.016;
+function renderParticles(timestamp) {
+  // compute delta time (seconds) and frame scale relative to previous fixed-step
+  if (lastTime === null) lastTime = timestamp;
+  let dt = (timestamp - lastTime) / 1000;
+  // clamp dt to avoid big jumps after tab switching
+  dt = Math.min(dt, 0.05);
+  lastTime = timestamp;
+  time += dt;
+
+  const frameBaseline = 0.016; // previous fixed-step baseline (~60fps)
+  const scale = dt / frameBaseline;
 
   const positions = [];
   const sizes = [];
   const lives = [];
 
   particles.forEach((p) => {
-    p.update();
+    p.update(scale, dt);
     positions.push(p.x, p.y);
     sizes.push(p.size);
     lives.push(p.life);
@@ -188,7 +207,8 @@ function renderParticles() {
   requestAnimationFrame(renderParticles);
 }
 
-renderParticles();
+// start animation loop
+requestAnimationFrame(renderParticles);
 
 const themeToggle = document.getElementById("themeToggle");
 
@@ -200,21 +220,29 @@ function applyTheme(isDarkMode) {
   isDark = isDarkMode;
 }
 
-// Initial theme
-applyTheme(themeToggle.checked);
-
-themeToggle.addEventListener("change", () => {
+if (themeToggle) {
+  // Initial theme from toggle state
   applyTheme(themeToggle.checked);
-});
 
-const savedTheme = localStorage.getItem("theme");
-if (savedTheme) {
-  themeToggle.checked = savedTheme === "dark";
-  applyTheme(themeToggle.checked);
+  themeToggle.addEventListener("change", () => {
+    applyTheme(themeToggle.checked);
+  });
+
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme) {
+    themeToggle.checked = savedTheme === "dark";
+    applyTheme(themeToggle.checked);
+  }
+
+  themeToggle.addEventListener("change", () => {
+    const mode = themeToggle.checked ? "dark" : "light";
+    localStorage.setItem("theme", mode);
+    applyTheme(themeToggle.checked);
+  });
+} else {
+  // Fallback: apply saved theme (if any)
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme) {
+    applyTheme(savedTheme === "dark");
+  }
 }
-
-themeToggle.addEventListener("change", () => {
-  const mode = themeToggle.checked ? "dark" : "light";
-  localStorage.setItem("theme", mode);
-  applyTheme(themeToggle.checked);
-});
