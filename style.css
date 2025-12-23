@@ -254,3 +254,69 @@ input:checked + .slider::before {
     padding: 10px;
   }
 }
+
+/* WebGL Canvas Background */
+#particleCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Update existing elements to have transparency and z-index */
+body {
+  position: relative;
+}
+
+header {
+  position: relative;
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(10px);
+  z-index: 1;
+}
+
+[data-theme="dark"] header {
+  background: rgba(30, 41, 59, 0.85) !important;
+}
+
+.nav {
+  position: relative;
+  z-index: 2;
+}
+
+section {
+  position: relative;
+  z-index: 1;
+}
+
+.project {
+  background: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(10px);
+}
+
+[data-theme="dark"] .project {
+  background: rgba(30, 41, 59, 0.9) !important;
+}
+
+.skill-category {
+  background: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(10px);
+}
+
+[data-theme="dark"] .skill-category {
+  background: rgba(30, 41, 59, 0.9) !important;
+}
+
+footer {
+  position: relative;
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(10px);
+  z-index: 1;
+}
+
+[data-theme="dark"] footer {
+  background: rgba(30, 41, 59, 0.85) !important;
+}
