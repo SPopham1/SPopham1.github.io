@@ -65,7 +65,6 @@ class Particle {
     this.vx *= 0.98;
     this.vy *= 0.98;
 
-    // 🔴 ADD THESE TWO LINES
     this.vx += -this.x * 0.00005;
     this.vy += -this.y * 0.00005;
 
