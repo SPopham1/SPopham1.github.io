@@ -5,7 +5,8 @@ if (!gl) {
   console.error("WebGL not supported");
 }
 
-let isDark = false;
+let aspect = window.innerWidth / window.innerHeight;
+let isDark = true;
 const particles = [];
 const numParticles = 500;
 let mouseX = 0;
@@ -16,6 +17,7 @@ function resizeCanvas() {
   const dpr = window.devicePixelRatio || 1;
   canvas.width = window.innerWidth * dpr;
   canvas.height = window.innerHeight * dpr;
+  aspect = canvas.width / canvas.height;
   canvas.style.width = window.innerWidth + "px";
   canvas.style.height = window.innerHeight + "px";
   gl.viewport(0, 0, canvas.width, canvas.height);
@@ -37,9 +39,9 @@ class Particle {
   reset() {
     this.x = Math.random() * 2 - 1;
     this.y = Math.random() * 2 - 1;
-    this.vx = (Math.random() - 0.5) * 0.002;
-    this.vy = (Math.random() - 0.5) * 0.002;
-    this.size = Math.random() * 2 + 1;
+    this.vx = (Math.random() - 0.5) * 0.01;
+    this.vy = (Math.random() - 0.5) * 0.01;
+    this.size = (Math.random() * 2 + 1) * (window.devicePixelRatio || 1));
     this.life = Math.random();
   }
 
@@ -49,21 +51,21 @@ class Particle {
     const dist = Math.sqrt(dx * dx + dy * dy);
 
     if (dist < 0.3) {
-      const force = (0.3 - dist) * 0.0001;
+      const force = (0.3 - dist) * 0.001;
       this.vx += dx * force;
       this.vy += dy * force;
     }
+    
+    const angle = Math.sin(this.x * 3 + time * 0.5) + 
+                  Math.cos(this.y * 3 + time * 0.5);
 
-    const noiseX = Math.sin(this.x * 3 + time * 0.5) * 0.0002;
-    const noiseY = Math.cos(this.y * 3 + time * 0.5) * 0.0002;
-
-    this.vx += noiseX;
-    this.vy += noiseY;
+    this.vx += Math.cos(angle) * 0.0004;
+    this.vy += Math.sin(angle) * 0.0004;
 
     this.vx *= 0.98;
     this.vy *= 0.98;
 
-    this.x += this.vx;
+    this.x += this.vx / aspect;
     this.y += this.vy;
 
     this.life += 0.002;
@@ -87,7 +89,7 @@ const vsSource = `
   
   void main() {
     gl_Position = vec4(aPosition, 0.0, 1.0);
-    gl_PointSize = aSize * 1.5 * (1.0 / devicePixelRatio);
+    gl_PointSize = aSize * 1.5;
     vLife = aLife;
   }
 `;
