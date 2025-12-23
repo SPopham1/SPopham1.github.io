@@ -7,7 +7,7 @@ if (!gl) {
 
 let isDark = false;
 const particles = [];
-const numParticles = 150;
+const numParticles = 1500;
 let mouseX = 0;
 let mouseY = 0;
 let time = 0;
@@ -84,7 +84,7 @@ const vsSource = `
   
   void main() {
     gl_Position = vec4(aPosition, 0.0, 1.0);
-    gl_PointSize = aSize;
+    gl_PointSize = aSize * 4;
     vLife = aLife;
   }
 `;
