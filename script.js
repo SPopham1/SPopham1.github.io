@@ -41,7 +41,7 @@ class Particle {
     this.y = Math.random() * 2 - 1;
     this.vx = (Math.random() - 0.5) * 0.01;
     this.vy = (Math.random() - 0.5) * 0.01;
-    this.size = (Math.random() * 2 + 1) * (window.devicePixelRatio || 1));
+    this.size = (Math.random() * 2 + 1) * (window.devicePixelRatio || 1);
     this.life = Math.random();
   }
 
@@ -51,20 +51,26 @@ class Particle {
     const dist = Math.sqrt(dx * dx + dy * dy);
 
     if (dist < 0.3) {
-      const force = (0.3 - dist) * 0.001;
+      const force = (0.3 - dist) * 0.0001;
       this.vx += dx * force;
       this.vy += dy * force;
     }
-    
-    const angle = Math.sin(this.x * 3 + time * 0.5) + 
-                  Math.cos(this.y * 3 + time * 0.5);
+
+    // noise
+    const angle = Math.sin(this.y * 3.0 + time) + Math.cos(this.x * 3.0 - time);
 
     this.vx += Math.cos(angle) * 0.0004;
     this.vy += Math.sin(angle) * 0.0004;
 
+    // damping
     this.vx *= 0.98;
     this.vy *= 0.98;
 
+    // 🔴 ADD THESE TWO LINES
+    this.vx += -this.x * 0.00005;
+    this.vy += -this.y * 0.00005;
+
+    // integrate
     this.x += this.vx / aspect;
     this.y += this.vy;
 
