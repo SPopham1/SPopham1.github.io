@@ -13,8 +13,11 @@ let mouseY = 0;
 let time = 0;
 
 function resizeCanvas() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = window.innerWidth * dpr;
+  canvas.height = window.innerHeight * dpr;
+  canvas.style.width = window.innerWidth + "px";
+  canvas.style.height = window.innerHeight + "px";
   gl.viewport(0, 0, canvas.width, canvas.height);
 }
 
@@ -36,7 +39,7 @@ class Particle {
     this.y = Math.random() * 2 - 1;
     this.vx = (Math.random() - 0.5) * 0.002;
     this.vy = (Math.random() - 0.5) * 0.002;
-    this.size = Math.random() * 2 + 1;
+    this.size = Math.random() * 4 + 2;
     this.life = Math.random();
   }
 
@@ -108,6 +111,12 @@ function createShader(gl, type, source) {
   const shader = gl.createShader(type);
   gl.shaderSource(shader, source);
   gl.compileShader(shader);
+
+  if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+    console.error(gl.getShaderInfoLog(shader));
+    gl.deleteShader(shader);
+    return null;
+  }
   return shader;
 }
 
@@ -175,13 +184,31 @@ function renderParticles() {
 
 renderParticles();
 
-// Update theme detection
 const themeToggle = document.getElementById("themeToggle");
-if (themeToggle) {
-  const updateParticleTheme = () => {
-    isDark = document.documentElement.getAttribute("data-theme") === "dark";
-  };
 
-  themeToggle.addEventListener("change", updateParticleTheme);
-  updateParticleTheme();
+function applyTheme(isDarkMode) {
+  document.documentElement.setAttribute(
+    "data-theme",
+    isDarkMode ? "dark" : "light"
+  );
+  isDark = isDarkMode;
 }
+
+// Initial theme
+applyTheme(themeToggle.checked);
+
+themeToggle.addEventListener("change", () => {
+  applyTheme(themeToggle.checked);
+});
+
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme) {
+  themeToggle.checked = savedTheme === "dark";
+  applyTheme(themeToggle.checked);
+}
+
+themeToggle.addEventListener("change", () => {
+  const mode = themeToggle.checked ? "dark" : "light";
+  localStorage.setItem("theme", mode);
+  applyTheme(themeToggle.checked);
+});
