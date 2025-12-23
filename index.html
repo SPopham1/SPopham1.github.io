@@ -4,153 +4,155 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sam Popham | Portfolio</title>
-    <link rel="stylesheet" href="style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js"></script>
   </head>
-
-  <nav class="nav">
-    <a href="#projects">Projects</a>
-    <a href="#skills">Skills</a>
-    <a href="#contact">Contact</a>
-  </nav>
-
   <body>
-    <label class="theme-switch">
-      <input type="checkbox" id="themeToggle" />
-      <span class="slider"></span>
-    </label>
+    <canvas id="particleCanvas"></canvas>
 
-    <header>
-      <h1>Sam Popham</h1>
-      <p>Computer Science Student | University of Bath</p>
-      <p class="subtitle">Python • Java • C++ • AI & Visual Computing</p>
-    </header>
+    <div class="content">
+      <label class="theme-switch">
+        <input type="checkbox" id="themeToggle" />
+        <span class="slider"></span>
+      </label>
 
-    <section>
-      <h2>About Me</h2>
-      <p>
-        I'm a second-year Computer Science student at the University of Bath
-        with a strong foundation in software development and a passion for
-        interactive technologies, computer graphics, and artificial
-        intelligence. I enjoy building practical applications that combine
-        technical problem-solving with creative thinking.
-      </p>
-      <p>
-        Currently achieving first-class grades and expanding my expertise in
-        machine learning, visual computing, and advanced algorithms.
-      </p>
-    </section>
+      <nav class="nav">
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
 
-    <section>
-      <h2>Featured Projects</h2>
+      <header>
+        <h1>Sam Popham</h1>
+        <p>Computer Science Student | University of Bath</p>
+        <p class="subtitle">Python • Java • C++ • AI & Visual Computing</p>
+      </header>
 
-      <div class="project">
-        <h3>Physically Based Raytracer</h3>
+      <section>
+        <h2>About Me</h2>
         <p>
-          Built a raytracer from scratch in C++, implementing physically based
-          lighting, reflections, refractions, and material systems. Produces
-          rendered images with realistic shading and global illumination.
+          I'm a second-year Computer Science student at the University of Bath
+          with a strong foundation in software development and a passion for
+          interactive technologies, computer graphics, and artificial
+          intelligence. I enjoy building practical applications that combine
+          technical problem-solving with creative thinking.
         </p>
-        <div class="project-meta">Language: C++</div>
-        <a
-          href="https://github.com/SPopham1/Raytracing-in-one-weekend-fork"
-          target="_blank"
-          >View Project</a
-        >
-      </div>
-
-      <div class="project">
-        <h3>Chess Engine with AI Search</h3>
         <p>
-          Developed a chess engine using alpha-beta pruning, quiescence search,
-          MVV-LVA move ordering, and transposition tables. Optimized for search
-          depth and evaluation speed under computational constraints.
+          Currently achieving first-class grades and expanding my expertise in
+          machine learning, visual computing, and advanced algorithms.
         </p>
-        <div class="project-meta">Language: Python</div>
-        <a href="https://github.com/SPopham1/chessbot" target="_blank"
-          >View Project</a
-        >
-      </div>
+      </section>
 
-      <div class="project">
-        <h3>WebGL Bézier Curve Visualiser</h3>
-        <p>
-          Interactive Bézier curve rendering with real-time visual output,
-          applying vector mathematics and parametric curve equations.
-        </p>
-        <div class="project-meta">Language: JavaScript, WebGL</div>
-        <a
-          href="https://github.com/SPopham1/Bezier-Curve-Visualiser"
-          target="_blank"
-          >View Project</a
-        >
-      </div>
+      <section id="projects">
+        <h2>Featured Projects</h2>
 
-      <div class="project">
-        <h3>Mobile Physical Shutoff Alarm App</h3>
-        <p>
-          Contributed to an Android application featuring alarms, notifications,
-          local persistence, and machine learning for activity verification
-          using human pose detection. Built with modular, clean architecture.
-        </p>
-        <div class="project-meta">Language: Flutter/Dart • Group Project</div>
-      </div>
-
-      <div class="project">
-        <h3>Python Weather App</h3>
-        <p>
-          Simple weather application for checking current weather conditions.
-        </p>
-        <div class="project-meta">Language: Python</div>
-        <a href="https://github.com/SPopham1/python-weather-app" target="_blank"
-          >View Project</a
-        >
-      </div>
-    </section>
-
-    <section>
-      <h2>Skills & Technologies</h2>
-      <div class="skills-grid">
-        <div class="skill-category">
-          <h3>Languages</h3>
-          <p>Python, Java, C++, JavaScript, Dart, HTML/CSS, Haskell</p>
-        </div>
-        <div class="skill-category">
-          <h3>Tools & Platforms</h3>
-          <p>Git, VSCode, Blender, Unity, WebGL, Flutter</p>
-        </div>
-        <div class="skill-category">
-          <h3>Focus Areas</h3>
+        <div class="project">
+          <h3>Physically Based Raytracer</h3>
           <p>
-            AI & Machine Learning, Computer Graphics, Visual Computing,
-            Interactive Systems
+            Built a raytracer from scratch in C++, implementing physically based
+            lighting, reflections, refractions, and material systems. Produces
+            rendered images with realistic shading and global illumination.
           </p>
+          <div class="project-meta">Language: C++</div>
+          <a
+            href="https://github.com/SPopham1/Raytracing-in-one-weekend-fork"
+            target="_blank"
+            >View Project</a
+          >
         </div>
-      </div>
-    </section>
 
-    <section>
-      <h2>Contact</h2>
-      <p>
-        GitHub:
-        <a href="https://github.com/spopham1" target="_blank"
-          >github.com/spopham1</a
-        ><br />
-        Email: <a href="mailto:skpp21@bath.ac.uk">skpp21@bath.ac.uk</a><br />
-      </p>
-    </section>
+        <div class="project">
+          <h3>Chess Engine with AI Search</h3>
+          <p>
+            Developed a chess engine using alpha-beta pruning, quiescence
+            search, MVV-LVA move ordering, and transposition tables. Optimized
+            for search depth and evaluation speed under computational
+            constraints.
+          </p>
+          <div class="project-meta">Language: Python</div>
+          <a href="https://github.com/SPopham1/chessbot" target="_blank"
+            >View Project</a
+          >
+        </div>
 
-    <footer>
-      <p>© 2025 Sam Popham</p>
-    </footer>
+        <div class="project">
+          <h3>WebGL Bézier Curve Visualiser</h3>
+          <p>
+            Interactive Bézier curve rendering with real-time visual output,
+            applying vector mathematics and parametric curve equations.
+          </p>
+          <div class="project-meta">Language: JavaScript, WebGL</div>
+          <a
+            href="https://github.com/SPopham1/Bezier-Curve-Visualiser"
+            target="_blank"
+            >View Project</a
+          >
+        </div>
 
-    <script src="script.js"></script>
+        <div class="project">
+          <h3>Mobile Physical Shutoff Alarm App</h3>
+          <p>
+            Contributed to an Android application featuring alarms,
+            notifications, local persistence, and machine learning for activity
+            verification using human pose detection. Built with modular, clean
+            architecture.
+          </p>
+          <div class="project-meta">Language: Flutter/Dart • Group Project</div>
+        </div>
+
+        <div class="project">
+          <h3>Python Weather App</h3>
+          <p>
+            Simple weather application for checking current weather conditions.
+          </p>
+          <div class="project-meta">Language: Python</div>
+          <a
+            href="https://github.com/SPopham1/python-weather-app"
+            target="_blank"
+            >View Project</a
+          >
+        </div>
+      </section>
+
+      <section id="skills">
+        <h2>Skills & Technologies</h2>
+        <div class="skills-grid">
+          <div class="skill-category">
+            <h3>Languages</h3>
+            <p>Python, Java, C++, JavaScript, Dart, HTML/CSS, Haskell</p>
+          </div>
+          <div class="skill-category">
+            <h3>Tools & Platforms</h3>
+            <p>Git, VSCode, Blender, Unity, WebGL, Flutter</p>
+          </div>
+          <div class="skill-category">
+            <h3>Focus Areas</h3>
+            <p>
+              AI & Machine Learning, Computer Graphics, Visual Computing,
+              Interactive Systems
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <h2>Contact</h2>
+        <p>
+          GitHub:
+          <a href="https://github.com/spopham1" target="_blank"
+            >github.com/spopham1</a
+          ><br />
+          Email: <a href="mailto:skpp21@bath.ac.uk">skpp21@bath.ac.uk</a><br />
+        </p>
+      </section>
+
+      <footer>
+        <p>© 2025 Sam Popham</p>
+      </footer>
+    </div>
   </body>
 </html>
