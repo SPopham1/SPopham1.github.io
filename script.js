@@ -39,7 +39,7 @@ class Particle {
     this.y = Math.random() * 2 - 1;
     this.vx = (Math.random() - 0.5) * 0.002;
     this.vy = (Math.random() - 0.5) * 0.002;
-    this.size = Math.random() * 4 + 2;
+    this.size = Math.random() * 2 + 1;
     this.life = Math.random();
   }
 
@@ -87,7 +87,7 @@ const vsSource = `
   
   void main() {
     gl_Position = vec4(aPosition, 0.0, 1.0);
-    gl_PointSize = aSize;
+    gl_PointSize = aSize * 4;
     vLife = aLife;
   }
 `;
