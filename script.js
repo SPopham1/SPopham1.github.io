@@ -42,7 +42,7 @@ class Particle {
     this.y = Math.random() * 2 - 1;
     this.vx = (Math.random() - 0.5) * 0.01;
     this.vy = (Math.random() - 0.5) * 0.01;
-    this.size = (Math.random() * 2 + 1) * (window.devicePixelRatio || 1);
+    this.size = (Math.random() * 6 + 2) * (window.devicePixelRatio || 1);
     this.life = Math.random();
   }
 
@@ -96,6 +96,8 @@ const vsSource = `
   void main() {
     gl_Position = vec4(aPosition, 0.0, 1.0);
     gl_PointSize = aSize * 1.5;
+    // increase point size multiplier for better visibility
+    gl_PointSize = aSize * 4.0;
     vLife = aLife;
   }
 `;
@@ -108,10 +110,12 @@ const fsSource = `
   void main() {
     vec2 coord = gl_PointCoord - vec2(0.5);
     float dist = length(coord);
-    if (dist > 0.5) discard;
+    if (dist > 0.6) discard;
     
-    float alpha = (1.0 - dist * 2.0) * sin(vLife * 3.14159);
-    gl_FragColor = vec4(uColor, alpha * 0.4);
+    float alpha = (1.0 - dist * 1.6) * sin(vLife * 3.14159);
+    alpha = clamp(alpha, 0.0, 1.0);
+    // stronger alpha to contrast with background
+    gl_FragColor = vec4(uColor, alpha * 0.95);
   }
 `;
 
@@ -159,7 +163,8 @@ gl.enableVertexAttribArray(aSize);
 gl.enableVertexAttribArray(aLife);
 
 gl.enable(gl.BLEND);
-gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+// use additive blending so particles glow over the background
+gl.blendFunc(gl.SRC_ALPHA, gl.ONE);
 
 function renderParticles(timestamp) {
   // compute delta time (seconds) and frame scale relative to previous fixed-step
@@ -199,7 +204,7 @@ function renderParticles(timestamp) {
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(lives), gl.DYNAMIC_DRAW);
   gl.vertexAttribPointer(aLife, 1, gl.FLOAT, false, 0, 0);
 
-  const color = isDark ? [0.2, 0.4, 0.8] : [0.15, 0.38, 0.92];
+  const color = isDark ? [0.35, 0.7, 1.0] : [1.0, 0.5, 0.2];
   gl.uniform3fv(uColor, color);
 
   gl.drawArrays(gl.POINTS, 0, particles.length);
