@@ -353,6 +353,8 @@ input:checked + .slider::before {
 .project-card {
   padding: 0;
   overflow: hidden;
+  position: relative; /* position context for overlays */
+  z-index: 1;
 }
 
 .project-link {
@@ -363,14 +365,12 @@ input:checked + .slider::before {
 
 .project-thumb {
   aspect-ratio: auto;
-  height: 100%;
-  position: relative;
-  overflow: hidden; /* keep scaled images contained */
+  height: auto; /* let image intrinsic height determine card size */
 }
 
 .project-thumb img {
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: cover;
   object-position: center center; /* ensure image is centred when cropped */
   display: block;
@@ -421,19 +421,18 @@ input:checked + .slider::before {
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  grid-auto-rows: 280px;
+  grid-auto-rows: auto; /* allow rows to size to content (image-driven) */
+  grid-auto-flow: dense; /* better packing when items vary in size */
   gap: 24px;
 }
 
 .project-featured {
   grid-column: span 2;
-  grid-row: span 2;
 }
 
 @media (max-width: 900px) {
   .project-featured {
     grid-column: span 1;
-    grid-row: span 1;
   }
 
   .project-thumb {
