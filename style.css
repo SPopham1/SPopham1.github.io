@@ -364,15 +364,19 @@ input:checked + .slider::before {
 .project-thumb {
   aspect-ratio: auto;
   height: 100%;
-  position: relative; /* ensure .project-overlay positions inside this container */
+  position: relative;
+  overflow: hidden; /* keep scaled images contained */
 }
 
 .project-thumb img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center center; /* ensure image is centred when cropped */
   display: block;
   transition: transform 0.4s ease;
+  position: relative; /* create stacking context so z-index works */
+  z-index: 1;
 }
 
 /* Hover zoom */
@@ -392,11 +396,14 @@ input:checked + .slider::before {
   justify-content: flex-end;
 
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.28s ease, transform 0.28s ease;
+  z-index: 2; /* ensure overlay appears above the image */
+  transform: translateY(6px);
 }
 
 .project-card:hover .project-overlay {
   opacity: 1;
+  transform: translateY(0);
 }
 
 .project-overlay h3 {
