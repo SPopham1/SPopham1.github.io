@@ -364,6 +364,7 @@ input:checked + .slider::before {
 .project-thumb {
   aspect-ratio: auto;
   height: 100%;
+  position: relative; /* ensure .project-overlay positions inside this container */
 }
 
 .project-thumb img {
