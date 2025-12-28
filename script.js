@@ -106,7 +106,7 @@ class Boid {
     const dy = mouseY - this.y;
     const dist = Math.sqrt(dx * dx + dy * dy);
     if (dist < 0.25 && dist > 0) {
-      const avoidForce = (0.25 - dist) * 0.0008;
+      const avoidForce = (0.25 - dist) * 0.008;
       this.vx -= (dx / dist) * avoidForce * scale;
       this.vy -= (dy / dist) * avoidForce * scale;
     }
