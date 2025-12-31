@@ -81,7 +81,10 @@ header p {
 }
 
 section {
-  max-width: 900px;
+  /* Make section span almost the full viewport while keeping 20px gutters.
+    `width: calc(100% - 40px)` keeps ~20px on each side for all screens. */
+  width: calc(100% - 40px);
+  max-width: none;
   margin: 40px auto;
   padding: 32px 28px;
 
@@ -355,6 +358,13 @@ input:checked + .slider::before {
   overflow: hidden;
   position: relative; /* position context for overlays */
   z-index: 1;
+  display: inline-block; /* required for column layout */
+  width: 100%;
+  margin-bottom: 24px;
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  -moz-column-break-inside: avoid;
+  page-break-inside: avoid;
 }
 
 .project-link {
@@ -419,20 +429,42 @@ input:checked + .slider::before {
 }
 
 .projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  grid-auto-rows: auto; /* allow rows to size to content (image-driven) */
-  grid-auto-flow: dense; /* better packing when items vary in size */
-  gap: 24px;
+  /* Masonry-style layout using CSS columns for a Pinterest-like grid.
+     `column-width` lets the browser decide how many columns fit, adapting to window size. */
+  column-width: 320px;
+  column-gap: 24px;
+  -webkit-column-width: 320px;
+  -webkit-column-gap: 24px;
+  width: 100%;
 }
 
-.project-featured {
-  grid-column: span 2;
+/* Featured cards span all columns (large hero cards). */
+.project-featured,
+.project-card-featured {
+  column-span: all;
+  -webkit-column-span: all;
 }
 
-@media (max-width: 900px) {
-  .project-featured {
-    grid-column: span 1;
+@media (max-width: 1200px) {
+  .projects-grid {
+    column-width: 280px;
+    -webkit-column-width: 280px;
+  }
+}
+
+@media (max-width: 768px) {
+  .projects-grid {
+    column-width: 180px;
+    column-gap: 16px;
+    -webkit-column-width: 180px;
+    -webkit-column-gap: 16px;
+  }
+
+  /* On small screens featured cards stop spanning everything so layout remains usable */
+  .project-featured,
+  .project-card-featured {
+    column-span: none;
+    -webkit-column-span: none;
   }
 
   .project-thumb {
