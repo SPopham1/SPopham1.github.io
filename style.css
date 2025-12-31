@@ -400,7 +400,9 @@ input:checked + .slider::before {
   inset: 0;
   background: linear-gradient(to top, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.25));
   color: white;
-  padding: 20px;
+  /* responsive padding so overlay inner gutter scales with image width */
+  padding: clamp(12px, 2vw, 20px);
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -418,14 +420,23 @@ input:checked + .slider::before {
 
 .project-overlay h3 {
   margin: 0 0 6px 0;
-  font-size: 1.2rem;
+  /* scale headline with viewport but keep readable limits */
+  font-size: clamp(1rem, 2.4vw, 1.4rem);
+  line-height: 1.15;
+  max-width: min(640px, 90%);
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .project-overlay p {
   margin: 0;
-  font-size: 0.95rem;
+  /* smaller body copy that also scales with width */
+  font-size: clamp(0.85rem, 1.6vw, 1rem);
   line-height: 1.4;
   color: #e5e7eb;
+  max-width: min(800px, 95%);
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .projects-grid {
