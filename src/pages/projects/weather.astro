@@ -1,0 +1,40 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Weather App | Sam Popham">
+  <section class="max-w-4xl mx-auto px-6 py-16">
+    <h1 class="text-4xl font-bold mb-4">Weather Reporter</h1>
+
+    <p class="text-gray-600 dark:text-gray-400 mb-6">
+      A desktop weather application built in Python using PyQt6 and the OpenWeather API.
+      The app allows users to search for multiple locations at once and presents current
+      weather conditions in a clean, card-based interface with responsive layout and
+      keyboard-friendly input.
+    </p>
+
+    <img
+      src="/images/weather.png"
+      alt="Weather Reporter application showing multiple weather cards"
+      class="rounded-xl shadow-lg mb-8"
+    />
+
+    <h2 class="text-2xl font-semibold mb-3">Key Features</h2>
+    <ul class="list-disc list-inside mb-6 text-gray-600 dark:text-gray-400">
+      <li>Multi-location search with country code validation</li>
+      <li>Keyboard-navigable autocomplete for city input</li>
+      <li>Asynchronous API requests using worker threads</li>
+      <li>Metric and imperial unit switching</li>
+      <li>Card-based UI displaying temperature, wind, humidity, pressure, and sunrise/sunset</li>
+      <li>Consistent custom colour palette and accessible visual design</li>
+    </ul>
+
+    <a
+      href="https://github.com/SPopham1/python-weather-app"
+      target="_blank"
+      class="inline-block mt-4 text-blue-600 hover:underline"
+    >
+      View on GitHub →
+    </a>
+  </section>
+</Layout>
