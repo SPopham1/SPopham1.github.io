@@ -1,15 +1,66 @@
 ---
-import '../styles/global.css';
+import '../styles/tailwind.css';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <slot name="head" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>{title}</title>
   </head>
-  <body class="bg-neutral-950 text-white">
-    <slot />
+  <body class="font-inter m-0 bg-light dark:bg-dark text-text-main-light dark:text-text-main-dark transition-colors duration-300 leading-relaxed relative">
+    <canvas id="particleCanvas" class="fixed top-0 left-0 w-full h-full z-0 pointer-events-none"></canvas>
+    
+    <div class="content relative z-10">
+      <label class="theme-switch fixed top-5 right-5 z-[9999]">
+        <input type="checkbox" id="themeToggle" class="hidden" />
+        <span class="slider block w-[50px] h-[26px] bg-gray-300 dark:bg-gray-600 rounded-full cursor-pointer relative transition-colors duration-300">
+          <span class="slider-dot absolute w-[22px] h-[22px] left-0.5 top-0.5 bg-white dark:bg-gray-800 rounded-full transition-transform duration-300 shadow-md"></span>
+        </span>
+      </label>
+
+      <slot />
+    </div>
+
+    <script src="/scripts/particles.js"></script>
+    <script>
+      const themeToggle = document.getElementById('themeToggle') as HTMLInputElement;
+      
+      function applyTheme(isDark: boolean) {
+        if (isDark) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      }
+
+      // Load saved theme
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const isDark = savedTheme ? savedTheme === 'dark' : prefersDark;
+      
+      if (themeToggle) {
+        themeToggle.checked = isDark;
+        applyTheme(isDark);
+        
+        themeToggle.addEventListener('change', () => {
+          applyTheme(themeToggle.checked);
+        });
+      }
+    </script>
   </body>
 </html>

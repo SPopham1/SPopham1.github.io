@@ -1,0 +1,23 @@
+/* src/styles/tailwind.css - Tailwind v4 uses CSS-based config */
+@import "tailwindcss";
+
+@theme {
+  /* Custom colors */
+  --color-light: #f9fafb;
+  --color-dark: #0f172a;
+  --color-card-light: #ffffff;
+  --color-card-dark: #1e293b;
+  --color-border-light: #e5e7eb;
+  --color-border-dark: #334155;
+  --color-text-main-light: #111827;
+  --color-text-main-dark: #f8fafc;
+  --color-text-muted-light: #4b5563;
+  --color-text-muted-dark: #cbd5e1;
+  --color-accent-light: #2563eb;
+  --color-accent-dark: #3b82f6;
+  --color-accent-hover-light: #1d4ed8;
+  --color-accent-hover-dark: #60a5fa;
+
+  /* Font family */
+  --font-family-inter: "Inter", sans-serif;
+}
