@@ -1,46 +1,54 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+
+import raytracerImg from "../assets/images/raytracer.png";
+import chessImg from "../assets/images/chess.png";
+import bezierImg from "../assets/images/bezier.png";
+import gestureImg from "../assets/images/gesture-controller.png";
+import alarmImg from "../assets/images/alarm-app.png";
+import weatherImg from "../assets/images/weather.png";
 
 const projects = [
   {
     title: "Physically Based Raytracer",
     description: "C++ raytracer implementing physically based lighting, reflections, refractions, and global illumination.",
-    image: "/images/raytracer.png",
+    image: raytracerImg,
     link: "/projects/raytracer",
-    featured: true
+    featured: false
   },
   {
     title: "Chess Engine with AI Search",
     description: "Alpha-beta pruning, quiescence search, MVV-LVA ordering, and transposition tables optimized for search depth.",
-    image: "/images/chess.png",
+    image: chessImg,
     link: "https://github.com/SPopham1/chessbot",
     featured: false
   },
   {
     title: "WebGL Bezier Curve Visualiser",
     description: "Interactive real-time Bezier curve rendering using vector mathematics and parametric equations.",
-    image: "/images/bezier.png",
+    image: bezierImg,
     link: "https://github.com/SPopham1/Bezier-Curve-Visualiser",
     featured: false
   },
   {
     title: "Hand Gesture Volume Controller",
     description: "Background computer vision system for volume control using MediaPipe hand landmarks and tray controls.",
-    image: "/images/gesture-controller.png",
+    image: gestureImg,
     link: "https://github.com/SPopham1/gesture-calibration-system",
-    featured: true
+    featured: false
   },
   {
     title: "Physical Shutoff Alarm App",
     description: "Android app with alarms, notifications, local persistence, and ML-based activity verification using pose detection.",
-    image: "/images/alarm-app.png",
-    link: "#",
+    image: alarmImg,
+    link: null,
     featured: false
   },
   {
     title: "Python Weather App",
     description: "Lightweight desktop application for retrieving and displaying real-time weather data.",
-    image: "/images/weather.png",
+    image: weatherImg,
     link: "/projects/weather",
     featured: false
   }
@@ -48,17 +56,35 @@ const projects = [
 ---
 
 <Layout title="Sam Popham | Portfolio">
+  <nav class="fixed left-0 top-0 h-screen w-20 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-r border-gray-200 dark:border-gray-700 hidden md:flex flex-col items-center py-6 z-50">
+
+    <!-- Links -->
+    <a href="#top" class="sidebar-link">
+      <i class="fa-solid fa-house"></i>
+      <span>Home</span>
+    </a>
+
+    <a href="#projects" class="sidebar-link">
+      <i class="fa-solid fa-code"></i>
+      <span>Projects</span>
+    </a>
+
+    <a href="#skills" class="sidebar-link">
+      <i class="fa-solid fa-layer-group"></i>
+      <span>Skills</span>
+    </a>
+
+    <a href="#contact" class="sidebar-link mt-auto">
+      <i class="fa-solid fa-envelope"></i>
+      <span>Contact</span>
+    </a>
+  </nav>
+
   <header class="bg-white/85 dark:bg-slate-800/85 backdrop-blur-[10px] border-b border-gray-200 dark:border-gray-700 py-10 px-5 text-center transition-all duration-300">
     <h1 class="text-5xl font-bold tracking-tight m-0">Sam Popham</h1>
     <p class="text-lg my-2.5">Computer Science Student | University of Bath</p>
     <p class="subtitle text-[0.95rem] opacity-85">Python • Java • C++ • AI & Visual Computing</p>
   </header>
-
-  <nav class="nav flex justify-center gap-8 py-6 px-5">
-    <a href="#projects" class="text-text-main-light dark:text-text-main-dark no-underline font-medium relative hover:text-accent-light dark:hover:text-accent-dark transition-colors duration-200 after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:w-0 after:h-0.5 after:bg-accent-light dark:after:bg-accent-dark after:transition-all after:duration-200 hover:after:w-full">Projects</a>
-    <a href="#skills" class="text-text-main-light dark:text-text-main-dark no-underline font-medium relative hover:text-accent-light dark:hover:text-accent-dark transition-colors duration-200 after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:w-0 after:h-0.5 after:bg-accent-light dark:after:bg-accent-dark after:transition-all after:duration-200 hover:after:w-full">Skills</a>
-    <a href="#contact" class="text-text-main-light dark:text-text-main-dark no-underline font-medium relative hover:text-accent-light dark:hover:text-accent-dark transition-colors duration-200 after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:w-0 after:h-0.5 after:bg-accent-light dark:after:bg-accent-dark after:transition-all after:duration-200 hover:after:w-full">Contact</a>
-  </nav>
 
   <section class="w-[calc(100%-40px)] max-w-none mx-auto my-10 px-7 py-8 bg-white/70 dark:bg-slate-800/65 backdrop-blur-[18px] rounded-2xl border border-white/35 dark:border-white/8 shadow-[0_20px_40px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.4)] dark:shadow-[0_20px_40px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.05)] relative z-10 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-[0_30px_60px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.5)]">
     <h2 class="border-b-2 border-gray-200 dark:border-gray-700 pb-2 mb-5 transition-colors duration-300">About Me</h2>
@@ -80,25 +106,56 @@ const projects = [
 
     <div class="columns-[320px] gap-6 w-full">
       {projects.map((project) => (
-        <div class={`inline-block w-full mb-6 break-inside-avoid ${project.featured ? 'col-span-full' : ''}`}>
-          <a 
-            href={project.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="block no-underline text-inherit"
-          >
-            <div class="relative overflow-hidden group">
-              <img 
+        <div class={`inline-block w-full mb-6 break-inside-avoid`}>
+          {project.link ? (
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="block no-underline text-inherit"
+              aria-label={`Open project: ${project.title}`}
+            >
+              <div class="relative overflow-hidden group">
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  width={396}
+                  height={396}
+                  format={'webp'}
+                  loading="lazy"
+                  placeholder="blur"
+                  priority
+                  class="w-full h-auto object-cover object-center block transition-transform duration-400 group-hover:scale-105"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/75 to-black/25 text-white p-4 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-1.5 group-hover:translate-y-0">
+                  <h3 class="m-0 mb-1.5 text-base leading-tight">{project.title}</h3>
+                  <p class="m-0 text-sm leading-snug text-gray-300">{project.description}</p>
+                </div>
+              </div>
+            </a>
+          ) : (
+            <div
+              class="relative overflow-hidden opacity-90 cursor-default"
+              aria-label={`Project: ${project.title} (coming soon)`}
+            >
+              <Image
                 src={project.image}
                 alt={project.title}
+                width={396}
+                height={396}
+                format={'webp'}
+                loading="lazy"
+                placeholder="blur"
+                priority
                 class="w-full h-auto object-cover object-center block transition-transform duration-400 group-hover:scale-105"
               />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/75 to-black/25 text-white p-4 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-1.5 group-hover:translate-y-0">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/75 to-black/25 text-white p-4 flex flex-col justify-end">
                 <h3 class="m-0 mb-1.5 text-base leading-tight">{project.title}</h3>
                 <p class="m-0 text-sm leading-snug text-gray-300">{project.description}</p>
+                <span class="mt-2 text-xs opacity-80">Coming soon</span>
               </div>
             </div>
-          </a>
+          )}
         </div>
       ))}
     </div>

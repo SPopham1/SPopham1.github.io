@@ -1,0 +1,9 @@
+# Cache all images for 30 days
+/images/*
+  Cache-Control: public, max-age=2592000, immutable
+
+# Cache CSS/JS for 30 days
+/_astro/*
+  Cache-Control: public, max-age=2592000, immutable
+/scripts/*
+  Cache-Control: public, max-age=2592000, immutable

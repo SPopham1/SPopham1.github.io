@@ -6,7 +6,7 @@ if (!gl) {
 }
 
 let aspect = window.innerWidth / window.innerHeight;
-let isDark = document.documentElement.classList.contains("dark");
+let isDark = true;
 const particles = [];
 const numParticles = 150;
 let mouseX = 0;
