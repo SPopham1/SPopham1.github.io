@@ -1,6 +1,6 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { Image } from 'astro:assets';
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
 
 import raytracerImg from "../assets/images/raytracer.png";
 import chessImg from "../assets/images/chess.png";
@@ -8,56 +8,72 @@ import bezierImg from "../assets/images/bezier.png";
 import gestureImg from "../assets/images/gesture-controller.png";
 import alarmImg from "../assets/images/alarm-app.png";
 import weatherImg from "../assets/images/weather.png";
+import smartshopImg from "../assets/images/smartshop.png";
 
 const projects = [
   {
     title: "Physically Based Raytracer",
-    description: "C++ raytracer implementing physically based lighting, reflections, refractions, and global illumination.",
+    description:
+      "C++ raytracer implementing physically based lighting, reflections, refractions, and global illumination.",
     image: raytracerImg,
     link: "/projects/raytracer",
-    featured: false
+    featured: false,
   },
   {
     title: "Chess Engine with AI Search",
-    description: "Alpha-beta pruning, quiescence search, MVV-LVA ordering, and transposition tables optimized for search depth.",
+    description:
+      "Alpha-beta pruning, quiescence search, MVV-LVA ordering, and transposition tables optimized for search depth.",
     image: chessImg,
     link: "https://github.com/SPopham1/chessbot",
-    featured: false
+    featured: false,
+  },
+  {
+    title: "Smart Shopping Assistant",
+    description:
+      "Create sharable shopping lists and generate efficient in-store routes.",
+    image: smartshopImg,
+    link: "https://github.com/SPopham1/smart-shopping-assistant",
+    featured: false,
   },
   {
     title: "WebGL Bezier Curve Visualiser",
-    description: "Interactive real-time Bezier curve rendering using vector mathematics and parametric equations.",
+    description:
+      "Interactive real-time Bezier curve rendering using vector mathematics and parametric equations.",
     image: bezierImg,
     link: "https://github.com/SPopham1/Bezier-Curve-Visualiser",
-    featured: false
+    featured: false,
   },
   {
     title: "Hand Gesture Volume Controller",
-    description: "Background computer vision system for volume control using MediaPipe hand landmarks and tray controls.",
+    description:
+      "Background computer vision system for volume control using MediaPipe hand landmarks and tray controls.",
     image: gestureImg,
     link: "https://github.com/SPopham1/gesture-calibration-system",
-    featured: false
+    featured: false,
   },
   {
     title: "Physical Shutoff Alarm App",
-    description: "Android app with alarms, notifications, local persistence, and ML-based activity verification using pose detection.",
+    description:
+      "Android app with alarms, notifications, local persistence, and ML-based activity verification using pose detection.",
     image: alarmImg,
     link: null,
-    featured: false
+    featured: false,
   },
   {
     title: "Python Weather App",
-    description: "Lightweight desktop application for retrieving and displaying real-time weather data.",
+    description:
+      "Lightweight desktop application for retrieving and displaying real-time weather data.",
     image: weatherImg,
     link: "/projects/weather",
-    featured: false
-  }
+    featured: false,
+  },
 ];
 ---
 
 <Layout title="Sam Popham | Portfolio">
-  <nav class="fixed left-0 top-0 h-screen w-20 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-r border-gray-200 dark:border-gray-700 hidden md:flex flex-col items-center py-6 z-50">
-
+  <nav
+    class="fixed left-0 top-0 h-screen w-20 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-r border-gray-200 dark:border-gray-700 hidden md:flex flex-col items-center py-6 z-50"
+  >
     <!-- Links -->
     <a href="#top" class="sidebar-link">
       <i class="fa-solid fa-house"></i>
@@ -80,20 +96,30 @@ const projects = [
     </a>
   </nav>
 
-  <header class="bg-white/85 dark:bg-slate-800/85 backdrop-blur-[10px] border-b border-gray-200 dark:border-gray-700 py-10 px-5 text-center transition-all duration-300">
+  <header
+    class="bg-white/85 dark:bg-slate-800/85 backdrop-blur-[10px] border-b border-gray-200 dark:border-gray-700 py-10 px-5 text-center transition-all duration-300"
+  >
     <h1 class="text-5xl font-bold tracking-tight m-0">Sam Popham</h1>
     <p class="text-lg my-2.5">Computer Science Student | University of Bath</p>
-    <p class="subtitle text-[0.95rem] opacity-85">Python • Java • C++ • AI & Visual Computing</p>
+    <p class="subtitle text-[0.95rem] opacity-85">
+      Python • Java • C++ • AI & Visual Computing
+    </p>
   </header>
 
-  <section class="w-[calc(100%-40px)] max-w-none mx-auto my-10 px-7 py-8 bg-white/70 dark:bg-slate-800/65 backdrop-blur-[18px] rounded-2xl border border-white/35 dark:border-white/8 shadow-[0_20px_40px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.4)] dark:shadow-[0_20px_40px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.05)] relative z-10 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-[0_30px_60px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.5)]">
-    <h2 class="border-b-2 border-gray-200 dark:border-gray-700 pb-2 mb-5 transition-colors duration-300">About Me</h2>
+  <section
+    class="w-[calc(100%-40px)] max-w-none mx-auto my-10 px-7 py-8 bg-white/70 dark:bg-slate-800/65 backdrop-blur-[18px] rounded-2xl border border-white/35 dark:border-white/8 shadow-[0_20px_40px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.4)] dark:shadow-[0_20px_40px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.05)] relative z-10 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-[0_30px_60px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.5)]"
+  >
+    <h2
+      class="border-b-2 border-gray-200 dark:border-gray-700 pb-2 mb-5 transition-colors duration-300"
+    >
+      About Me
+    </h2>
     <p>
-      I'm a second-year Computer Science student at the University of Bath
-      with a strong foundation in software development and a passion for
-      interactive technologies, computer graphics, and artificial
-      intelligence. I enjoy building practical applications that combine
-      technical problem-solving with creative thinking.
+      I'm a second-year Computer Science student at the University of Bath with
+      a strong foundation in software development and a passion for interactive
+      technologies, computer graphics, and artificial intelligence. I enjoy
+      building practical applications that combine technical problem-solving
+      with creative thinking.
     </p>
     <p>
       Currently achieving first-class grades and expanding my expertise in
@@ -101,93 +127,155 @@ const projects = [
     </p>
   </section>
 
-  <section id="projects" class="w-[calc(100%-40px)] max-w-none mx-auto my-10 px-7 py-8 bg-white/70 dark:bg-slate-800/65 backdrop-blur-[18px] rounded-2xl border border-white/35 dark:border-white/8 shadow-[0_20px_40px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.4)] dark:shadow-[0_20px_40px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.05)] relative z-10 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-[0_30px_60px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.5)]">
-    <h2 class="border-b-2 border-gray-200 dark:border-gray-700 pb-2 mb-5 transition-colors duration-300">Featured Projects</h2>
+  <section
+    id="projects"
+    class="w-[calc(100%-40px)] max-w-none mx-auto my-10 px-7 py-8 bg-white/70 dark:bg-slate-800/65 backdrop-blur-[18px] rounded-2xl border border-white/35 dark:border-white/8 shadow-[0_20px_40px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.4)] dark:shadow-[0_20px_40px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.05)] relative z-10 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-[0_30px_60px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.5)]"
+  >
+    <h2
+      class="border-b-2 border-gray-200 dark:border-gray-700 pb-2 mb-5 transition-colors duration-300"
+    >
+      Featured Projects
+    </h2>
 
     <div class="columns-[320px] gap-6 w-full">
-      {projects.map((project) => (
-        <div class={`inline-block w-full mb-6 break-inside-avoid`}>
-          {project.link ? (
-            <a
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="block no-underline text-inherit"
-              aria-label={`Open project: ${project.title}`}
-            >
-              <div class="relative overflow-hidden group">
+      {
+        projects.map((project) => (
+          <div class={`inline-block w-full mb-6 break-inside-avoid`}>
+            {project.link ? (
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="block no-underline text-inherit"
+                aria-label={`Open project: ${project.title}`}
+              >
+                <div class="relative overflow-hidden group">
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    width={396}
+                    height={396}
+                    format={"webp"}
+                    loading="lazy"
+                    placeholder="blur"
+                    priority
+                    class="w-full h-auto object-cover object-center block transition-transform duration-400 group-hover:scale-105"
+                  />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/75 to-black/25 text-white p-4 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-1.5 group-hover:translate-y-0">
+                    <h3 class="m-0 mb-1.5 text-base leading-tight">
+                      {project.title}
+                    </h3>
+                    <p class="m-0 text-sm leading-snug text-gray-300">
+                      {project.description}
+                    </p>
+                  </div>
+                </div>
+              </a>
+            ) : (
+              <div
+                class="relative overflow-hidden opacity-90 cursor-default"
+                aria-label={`Project: ${project.title} (coming soon)`}
+              >
                 <Image
                   src={project.image}
                   alt={project.title}
                   width={396}
                   height={396}
-                  format={'webp'}
+                  format={"webp"}
                   loading="lazy"
                   placeholder="blur"
                   priority
                   class="w-full h-auto object-cover object-center block transition-transform duration-400 group-hover:scale-105"
                 />
-                <div class="absolute inset-0 bg-gradient-to-t from-black/75 to-black/25 text-white p-4 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-1.5 group-hover:translate-y-0">
-                  <h3 class="m-0 mb-1.5 text-base leading-tight">{project.title}</h3>
-                  <p class="m-0 text-sm leading-snug text-gray-300">{project.description}</p>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/75 to-black/25 text-white p-4 flex flex-col justify-end">
+                  <h3 class="m-0 mb-1.5 text-base leading-tight">
+                    {project.title}
+                  </h3>
+                  <p class="m-0 text-sm leading-snug text-gray-300">
+                    {project.description}
+                  </p>
+                  <span class="mt-2 text-xs opacity-80">Coming soon</span>
                 </div>
               </div>
-            </a>
-          ) : (
-            <div
-              class="relative overflow-hidden opacity-90 cursor-default"
-              aria-label={`Project: ${project.title} (coming soon)`}
-            >
-              <Image
-                src={project.image}
-                alt={project.title}
-                width={396}
-                height={396}
-                format={'webp'}
-                loading="lazy"
-                placeholder="blur"
-                priority
-                class="w-full h-auto object-cover object-center block transition-transform duration-400 group-hover:scale-105"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/75 to-black/25 text-white p-4 flex flex-col justify-end">
-                <h3 class="m-0 mb-1.5 text-base leading-tight">{project.title}</h3>
-                <p class="m-0 text-sm leading-snug text-gray-300">{project.description}</p>
-                <span class="mt-2 text-xs opacity-80">Coming soon</span>
-              </div>
-            </div>
-          )}
-        </div>
-      ))}
+            )}
+          </div>
+        ))
+      }
     </div>
   </section>
 
-  <section id="skills" class="w-[calc(100%-40px)] max-w-none mx-auto my-10 px-7 py-8 bg-white/70 dark:bg-slate-800/65 backdrop-blur-[18px] rounded-2xl border border-white/35 dark:border-white/8 shadow-[0_20px_40px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.4)] dark:shadow-[0_20px_40px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.05)] relative z-10 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-[0_30px_60px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.5)]">
-    <h2 class="border-b-2 border-gray-200 dark:border-gray-700 pb-2 mb-5 transition-colors duration-300">Skills & Technologies</h2>
+  <section
+    id="skills"
+    class="w-[calc(100%-40px)] max-w-none mx-auto my-10 px-7 py-8 bg-white/70 dark:bg-slate-800/65 backdrop-blur-[18px] rounded-2xl border border-white/35 dark:border-white/8 shadow-[0_20px_40px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.4)] dark:shadow-[0_20px_40px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.05)] relative z-10 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-[0_30px_60px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.5)]"
+  >
+    <h2
+      class="border-b-2 border-gray-200 dark:border-gray-700 pb-2 mb-5 transition-colors duration-300"
+    >
+      Skills & Technologies
+    </h2>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mt-5">
-      <div class="bg-white/90 dark:bg-slate-800/90 p-5 rounded-lg border border-gray-200 dark:border-gray-700 transition-all duration-300 backdrop-blur-[10px]">
-        <h3 class="mt-0 mb-2.5 text-lg text-blue-600 dark:text-blue-400">Languages</h3>
-        <p class="m-0 text-gray-600 dark:text-gray-400 leading-relaxed">Python, Java, C++, JavaScript, Dart, HTML/CSS, Haskell</p>
+      <div
+        class="bg-white/90 dark:bg-slate-800/90 p-5 rounded-lg border border-gray-200 dark:border-gray-700 transition-all duration-300 backdrop-blur-[10px]"
+      >
+        <h3 class="mt-0 mb-2.5 text-lg text-blue-600 dark:text-blue-400">
+          Languages
+        </h3>
+        <p class="m-0 text-gray-600 dark:text-gray-400 leading-relaxed">
+          Python, Java, C++, JavaScript, Dart, HTML/CSS, Haskell
+        </p>
       </div>
-      <div class="bg-white/90 dark:bg-slate-800/90 p-5 rounded-lg border border-gray-200 dark:border-gray-700 transition-all duration-300 backdrop-blur-[10px]">
-        <h3 class="mt-0 mb-2.5 text-lg text-blue-600 dark:text-blue-400">Tools & Platforms</h3>
-        <p class="m-0 text-gray-600 dark:text-gray-400 leading-relaxed">Git, VSCode, Blender, Unity, WebGL, Flutter</p>
+      <div
+        class="bg-white/90 dark:bg-slate-800/90 p-5 rounded-lg border border-gray-200 dark:border-gray-700 transition-all duration-300 backdrop-blur-[10px]"
+      >
+        <h3 class="mt-0 mb-2.5 text-lg text-blue-600 dark:text-blue-400">
+          Tools & Platforms
+        </h3>
+        <p class="m-0 text-gray-600 dark:text-gray-400 leading-relaxed">
+          Git, VSCode, Blender, Unity, WebGL, Flutter
+        </p>
       </div>
-      <div class="bg-white/90 dark:bg-slate-800/90 p-5 rounded-lg border border-gray-200 dark:border-gray-700 transition-all duration-300 backdrop-blur-[10px]">
-        <h3 class="mt-0 mb-2.5 text-lg text-blue-600 dark:text-blue-400">Focus Areas</h3>
-        <p class="m-0 text-gray-600 dark:text-gray-400 leading-relaxed">AI & Machine Learning, Computer Graphics, Visual Computing, Interactive Systems</p>
+      <div
+        class="bg-white/90 dark:bg-slate-800/90 p-5 rounded-lg border border-gray-200 dark:border-gray-700 transition-all duration-300 backdrop-blur-[10px]"
+      >
+        <h3 class="mt-0 mb-2.5 text-lg text-blue-600 dark:text-blue-400">
+          Focus Areas
+        </h3>
+        <p class="m-0 text-gray-600 dark:text-gray-400 leading-relaxed">
+          AI & Machine Learning, Computer Graphics, Visual Computing,
+          Interactive Systems
+        </p>
       </div>
     </div>
   </section>
 
-  <section id="contact" class="w-[calc(100%-40px)] max-w-none mx-auto my-10 px-7 py-8 bg-white/70 dark:bg-slate-800/65 backdrop-blur-[18px] rounded-2xl border border-white/35 dark:border-white/8 shadow-[0_20px_40px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.4)] dark:shadow-[0_20px_40px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.05)] relative z-10 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-[0_30px_60px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.5)]">
-    <h2 class="border-b-2 border-gray-200 dark:border-gray-700 pb-2 mb-5 transition-colors duration-300">Contact</h2>
+  <section
+    id="contact"
+    class="w-[calc(100%-40px)] max-w-none mx-auto my-10 px-7 py-8 bg-white/70 dark:bg-slate-800/65 backdrop-blur-[18px] rounded-2xl border border-white/35 dark:border-white/8 shadow-[0_20px_40px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.4)] dark:shadow-[0_20px_40px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.05)] relative z-10 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-[0_30px_60px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.5)]"
+  >
+    <h2
+      class="border-b-2 border-gray-200 dark:border-gray-700 pb-2 mb-5 transition-colors duration-300"
+    >
+      Contact
+    </h2>
     <p>
-      GitHub: <a href="https://github.com/spopham1" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 no-underline font-medium hover:text-blue-800 dark:hover:text-blue-300 hover:underline transition-colors duration-200">github.com/spopham1</a><br />
-      Email: <a href="mailto:skpp21@bath.ac.uk" class="text-blue-600 dark:text-blue-400 no-underline font-medium hover:text-blue-800 dark:hover:text-blue-300 hover:underline transition-colors duration-200">skpp21@bath.ac.uk</a>
+      GitHub: <a
+        href="https://github.com/spopham1"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-blue-600 dark:text-blue-400 no-underline font-medium hover:text-blue-800 dark:hover:text-blue-300 hover:underline transition-colors duration-200"
+        >github.com/spopham1</a
+      ><br />
+      Email: <a
+        href="mailto:skpp21@bath.ac.uk"
+        class="text-blue-600 dark:text-blue-400 no-underline font-medium hover:text-blue-800 dark:hover:text-blue-300 hover:underline transition-colors duration-200"
+        >skpp21@bath.ac.uk</a
+      >
     </p>
   </section>
 
-  <footer class="text-center py-8 px-5 mt-16 bg-white/85 dark:bg-slate-800/85 border-t border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 transition-all duration-300 backdrop-blur-[10px]">
+  <footer
+    class="text-center py-8 px-5 mt-16 bg-white/85 dark:bg-slate-800/85 border-t border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 transition-all duration-300 backdrop-blur-[10px]"
+  >
     <p>© 2025 Sam Popham</p>
   </footer>
 </Layout>
