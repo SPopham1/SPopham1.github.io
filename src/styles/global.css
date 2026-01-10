@@ -14,3 +14,20 @@
 .sidebar-link:hover {
   @apply text-blue-600 dark:text-blue-400;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+section {
+  scroll-margin-top: 5rem;
+}
+
+.project-card.active-hover .group-hover\:opacity-100 {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.project-card.active-hover .group-hover\:scale-105 {
+  transform: scale(1.05);
+}
