@@ -1,0 +1,93 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout title="Chess Engine | Sam Popham" noParticles>
+  <section class="max-w-6xl mx-auto px-6 py-12">
+    <h1 class="text-4xl font-bold mb-8">Chess Engine — Deep Dive</h1>
+
+    <p class="text-gray-600 dark:text-gray-400 mb-6">
+      A high-performance chess engine written in Python emphasising search
+      efficiency and reproducibility.
+    </p>
+
+    <ul class="divide-y divide-gray-200 dark:divide-gray-700">
+      <!-- 1: Search tree visualization (image left) -->
+      <li class="flex flex-col md:flex-row items-center gap-8 py-12">
+        <figure class="md:w-1/2 w-full">
+          <!--
+            Image guidance:
+            High-quality screenshot of the engine's search tree visualization:
+            - top-down tree layout showing nodes explored, PV highlighted,
+            - dark background with coloured node highlights and thin connecting lines,
+            - include HUD with nodes/sec and current depth.
+          -->
+          <img
+            src="/src/assets/images/deep-dives/chess/initial-state.png"
+            alt="Search tree visualization"
+            class="w-full rounded-lg shadow-lg"
+          />
+        </figure>
+
+        <article class="md:w-1/2 w-full">
+          <h2 class="text-2xl font-semibold mb-3">Search Tree Visualization</h2>
+          <p class="text-gray-600 dark:text-gray-400">
+            Explore nodes and principal variations — see where pruning trims the
+            branches and how the engine focuses its search.
+          </p>
+        </article>
+      </li>
+
+      <!-- 2: Sample board & best move (image right) -->
+      <li
+        class="flex flex-col md:flex-row md:flex-row-reverse items-center gap-8 py-12"
+      >
+        <figure class="md:w-1/2 w-full">
+          <!--
+            Image guidance:
+            Sample board position with suggested best move:
+            - clean board screenshot with highlighted from→to move,
+            - evaluation score and short rationale visible nearby.
+          -->
+          <img
+            src="/src/assets/images/deep-dives/chess/mid-game.png"
+            alt="Sample board with best move"
+            class="w-full rounded-lg shadow-lg"
+          />
+        </figure>
+
+        <article class="md:w-1/2 w-full">
+          <h2 class="text-2xl font-semibold mb-3">
+            Sample Position & Best Move
+          </h2>
+          <p class="text-gray-600 dark:text-gray-400">
+            A concrete example showing the engine's chosen move and a short
+            explanation — checkmate your doubts with evidence.
+          </p>
+        </article>
+      </li>
+    </ul>
+
+    <!-- Text-only sections for additional concepts -->
+    <div class="max-w-4xl mx-auto space-y-8 mt-12">
+      <article>
+        <h2 class="text-2xl font-semibold mb-3">Move-Order Heatmap</h2>
+        <p class="text-gray-600 dark:text-gray-400">
+          Visualise how move ordering affects efficiency — because ordering
+          matters when you want to be first in 'line'. A horizontal move list
+          with colour-coded scores and timings highlights best moves and shows
+          the ordering impact on node counts.
+        </p>
+      </article>
+
+      <article>
+        <h2 class="text-2xl font-semibold mb-3">Performance Benchmarks</h2>
+        <p class="text-gray-600 dark:text-gray-400">
+          Compare nodes/sec across depths — faster searches let you go deeper,
+          so benchmark early and often. Clean line/area charts compare tuning
+          runs with labelled axes, legend, and annotations.
+        </p>
+      </article>
+    </div>
+  </section>
+</Layout>

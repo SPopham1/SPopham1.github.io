@@ -1,0 +1,95 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout title="Physical Shutoff Alarm App | Sam Popham" noParticles>
+  <section class="max-w-6xl mx-auto px-6 py-12">
+    <h1 class="text-4xl font-bold mb-8">
+      Physical Shutoff Alarm App — Deep Dive
+    </h1>
+
+    <p class="text-gray-600 dark:text-gray-400 mb-6">
+      Android app focused on reliable alarms and ML-based activity verification
+      with an offline-first design.
+    </p>
+
+    <ul class="divide-y divide-gray-200 dark:divide-gray-700">
+      <!-- 1: Alarm scheduling UI (image left) -->
+      <li class="flex flex-col md:flex-row items-center gap-8 py-12">
+        <figure class="md:w-1/2 w-full">
+          <!--
+            Image guidance:
+            Alarm scheduling UI:
+            - alarm list with recurrence, snooze options and example settings,
+            - clear typographic hierarchy and interactive controls visible.
+          -->
+          <img
+            src="/src/assets/images/deep-dives/alarm-app/alarm-list.png"
+            alt="Alarm scheduling UI"
+            class="w-full rounded-lg shadow-lg"
+          />
+        </figure>
+
+        <article class="md:w-1/2 w-full">
+          <h2 class="text-2xl font-semibold mb-3">Alarm Scheduling</h2>
+          <p class="text-gray-600 dark:text-gray-400">
+            Design for reliability: recurring schedules, robust notifications
+            and sensible defaults to avoid missed events.
+          </p>
+        </article>
+      </li>
+
+      <!-- 2: Pose-detection verification (image right) -->
+      <li
+        class="flex flex-col md:flex-row md:flex-row-reverse items-center gap-8 py-12"
+      >
+        <figure class="md:w-1/2 w-full">
+          <!--
+            Image guidance:
+            Pose-detection verification overlay:
+            - frame with detected keypoints, confidence masks and pass/fail indicator,
+            - show how verification integrates into the alarm flow.
+          -->
+          <img
+            src="/src/assets/images/deep-dives/alarm-app/create-alarm.png"
+            alt="Pose verification overlay"
+            class="w-full rounded-lg shadow-lg"
+          />
+        </figure>
+
+        <article class="md:w-1/2 w-full">
+          <h2 class="text-2xl font-semibold mb-3">Pose Verification</h2>
+          <p class="text-gray-600 dark:text-gray-400">
+            Lightweight pose checks confirm user activity while protecting
+            battery life — verification that actually verifies.
+          </p>
+        </article>
+      </li>
+
+      <!-- 3: Local-persistence snapshot (image left) -->
+      <li class="flex flex-col md:flex-row items-center gap-8 py-12">
+        <figure class="md:w-1/2 w-full">
+          <!--
+            Image guidance:
+            Local persistence/settings screenshot:
+            - settings screen showing backup/restore and storage indicators,
+            - highlight offline-first behaviour.
+          -->
+          <img
+            src="/src/assets/images/deep-dives/alarm-app/alarm-activation.png"
+            alt="Local persistence settings"
+            class="w-full rounded-lg shadow-lg"
+          />
+        </figure>
+
+        <article class="md:w-1/2 w-full">
+          <h2 class="text-2xl font-semibold mb-3">Local Persistence</h2>
+          <p class="text-gray-600 dark:text-gray-400">
+            Offline-first storage ensures alarms survive device restarts and
+            network outages — safety without surprises.
+          </p>
+        </article>
+      </li>
+    </ul>
+  </section>
+</Layout>

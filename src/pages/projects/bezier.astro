@@ -1,0 +1,65 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout title="Bezier Curve Visualiser | Sam Popham" noParticles>
+  <section class="max-w-6xl mx-auto px-6 py-12">
+    <h1 class="text-4xl font-bold mb-8">Bezier Curve Visualiser — Deep Dive</h1>
+
+    <p class="text-gray-600 dark:text-gray-400 mb-6">
+      Interactive visualiser demonstrating Bézier curve construction and de
+      Casteljau's algorithm with live controls.
+    </p>
+
+    <!-- Hero image -->
+    <figure class="mb-12">
+      <!--
+        Image guidance:
+        Bezier visualiser full view:
+        - control polygon with intermediate construction lines, final curve, and UI slider element,
+        - show de Casteljau algorithm in action with colors highlighting different levels.
+      -->
+      <img
+        src="/src/assets/images/deep-dives/bezier/bezier.png"
+        alt="Bezier curve visualiser"
+        class="w-full rounded-lg shadow-lg"
+      />
+    </figure>
+
+    <!-- Key features in text-only sections -->
+    <div class="space-y-8">
+      <article>
+        <h2 class="text-2xl font-semibold mb-3">
+          Control Points & Construction
+        </h2>
+        <p class="text-gray-600 dark:text-gray-400">
+          Step through de Casteljau's algorithm to see how Bézier curves are
+          constructed from linear interpolations. The visualiser shows initial
+          control polygon, intermediate points and lines for a chosen parameter
+          t, with bold colors for the final curve and thinner lines for
+          construction steps.
+        </p>
+      </article>
+
+      <article>
+        <h2 class="text-2xl font-semibold mb-3">Parameter Sweep & Animation</h2>
+        <p class="text-gray-600 dark:text-gray-400">
+          Animate the parameter t to demonstrate how points move along the curve
+          and how intermediate constructions evolve. The slider lets you step
+          through any t value and see the construction rebuild in real-time.
+        </p>
+      </article>
+
+      <article>
+        <h2 class="text-2xl font-semibold mb-3">Shader & Render Comparison</h2>
+        <p class="text-gray-600 dark:text-gray-400">
+          Compare GPU-rendered output with simple polylines to show smoothing
+          and performance benefits. The visualiser can toggle between
+          GPU-rendered curves and polyline approximations to highlight
+          antialiasing and smoothness improvements.
+        </p>
+      </article>
+    </div>
+  </section>
+</Layout>
+>

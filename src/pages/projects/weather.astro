@@ -1,40 +1,93 @@
 ---
-import Layout from '../../layouts/Layout.astro';
+import Layout from "../../layouts/Layout.astro";
 ---
 
-<Layout title="Weather App | Sam Popham">
-  <section class="max-w-4xl mx-auto px-6 py-16">
-    <h1 class="text-4xl font-bold mb-4">Weather Reporter</h1>
+<Layout title="Weather App | Sam Popham" noParticles>
+  <section class="max-w-6xl mx-auto px-6 py-12">
+    <h1 class="text-4xl font-bold mb-8">Weather Reporter — Deep Dive</h1>
 
     <p class="text-gray-600 dark:text-gray-400 mb-6">
-      A desktop weather application built in Python using PyQt6 and the OpenWeather API.
-      The app allows users to search for multiple locations at once and presents current
-      weather conditions in a clean, card-based interface with responsive layout and
-      keyboard-friendly input.
+      Desktop weather application built with PyQt6, focused on responsiveness
+      and accessibility.
     </p>
 
-    <img
-      src="/images/weather.png"
-      alt="Weather Reporter application showing multiple weather cards"
-      class="rounded-xl shadow-lg mb-8"
-    />
+    <ul class="divide-y divide-gray-200 dark:divide-gray-700">
+      <!-- 1: Multi-location card grid (image left) -->
+      <li class="flex flex-col md:flex-row items-center gap-8 py-12">
+        <figure class="md:w-1/2 w-full">
+          <!--
+            Image guidance:
+            Multi-location card grid:
+            - grid of weather cards showing temp, icon, brief details for multiple saved locations,
+            - clean, accessible typography and consistent iconography.
+          -->
+          <img
+            src="/src/assets/images/deep-dives/weather/metric.png"
+            alt="Multi-location weather cards"
+            class="w-full rounded-lg shadow-lg"
+          />
+        </figure>
 
-    <h2 class="text-2xl font-semibold mb-3">Key Features</h2>
-    <ul class="list-disc list-inside mb-6 text-gray-600 dark:text-gray-400">
-      <li>Multi-location search with country code validation</li>
-      <li>Keyboard-navigable autocomplete for city input</li>
-      <li>Asynchronous API requests using worker threads</li>
-      <li>Metric and imperial unit switching</li>
-      <li>Card-based UI displaying temperature, wind, humidity, pressure, and sunrise/sunset</li>
-      <li>Consistent custom colour palette and accessible visual design</li>
+        <article class="md:w-1/2 w-full">
+          <h2 class="text-2xl font-semibold mb-3">Multi-Location Cards</h2>
+          <p class="text-gray-600 dark:text-gray-400">
+            See several saved locations at a glance — quick glances, quicker
+            decisions.
+          </p>
+        </article>
+      </li>
+
+      <!-- 2: Autocomplete search (image right) -->
+      <li
+        class="flex flex-col md:flex-row md:flex-row-reverse items-center gap-8 py-12"
+      >
+        <figure class="md:w-1/2 w-full">
+          <!--
+            Image guidance:
+            Autocomplete search with suggestions:
+            - show search input with live suggestions and keyboard focus,
+            - include country codes and highlight matched characters.
+          -->
+          <img
+            src="/src/assets/images/deep-dives/weather/imperial.png"
+            alt="Autocomplete search"
+            class="w-full rounded-lg shadow-lg"
+          />
+        </figure>
+
+        <article class="md:w-1/2 w-full">
+          <h2 class="text-2xl font-semibold mb-3">Autocomplete Search</h2>
+          <p class="text-gray-600 dark:text-gray-400">
+            Keyboard-friendly autocomplete speeds up location entry — small UX
+            details make big usability gains.
+          </p>
+        </article>
+      </li>
+
+      <!-- 3: Unit toggle / loading state (image left) -->
+      <li class="flex flex-col md:flex-row items-center gap-8 py-12">
+        <figure class="md:w-1/2 w-full">
+          <!--
+            Image guidance:
+            Unit toggle and loading state:
+            - show C/F toggle and a progressive loading indicator while fetching data,
+            - example of cached result fallback if offline.
+          -->
+          <img
+            src="/src/assets/images/deep-dives/weather/use.gif"
+            alt="Unit toggle and loading"
+            class="w-full rounded-lg shadow-lg"
+          />
+        </figure>
+
+        <article class="md:w-1/2 w-full">
+          <h2 class="text-2xl font-semibold mb-3">Units & Loading</h2>
+          <p class="text-gray-600 dark:text-gray-400">
+            Responsive fetching with worker threads and smooth unit switching
+            keeps the UI snappy and accessible.
+          </p>
+        </article>
+      </li>
     </ul>
-
-    <a
-      href="https://github.com/SPopham1/python-weather-app"
-      target="_blank"
-      class="inline-block mt-4 text-blue-600 hover:underline"
-    >
-      View on GitHub
-    </a>
   </section>
 </Layout>
