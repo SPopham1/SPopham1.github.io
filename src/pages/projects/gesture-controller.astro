@@ -1,5 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import gestureDemo from "../../assets/images/deep-dives/gesture/up-down-use.gif";
+import { Image } from "astro:assets";
 ---
 
 <Layout title="Gesture Volume Controller | Sam Popham" noParticles>
@@ -21,8 +23,8 @@ import Layout from "../../layouts/Layout.astro";
         - hand in view with landmark overlay, calibration controls, and volume feedback visible,
         - showcase the full workflow in one comprehensive screenshot or GIF.
       -->
-      <img
-        src="/src/assets/images/deep-dives/gesture/up-down-use.gif"
+      <Image
+        src={gestureDemo}
         alt="Gesture volume controller in action"
         class="w-full rounded-lg shadow-lg"
       />

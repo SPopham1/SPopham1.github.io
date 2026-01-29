@@ -1,5 +1,9 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import finished from "../../assets/images/deep-dives/raytracer/finished.ppm";
+import cornellCosine from "../../assets/images/deep-dives/raytracer/cornell_cosine.ppm";
+import cornellPdf from "../../assets/images/deep-dives/raytracer/cornell_pdf.ppm";
+import { Image } from "astro:assets";
 ---
 
 <Layout title="Physically Based Raytracer | Sam Popham" noParticles>
@@ -23,8 +27,8 @@ import Layout from "../../layouts/Layout.astro";
             - grid showing the same scene at increasing sample counts (noisy -> clean),
             - annotate sample counts and timing where possible.
           -->
-          <img
-            src="/src/assets/images/deep-dives/raytracer/finished.ppm"
+          <Image
+            src={finished}
             alt="Progressive sampling sequence"
             class="w-full rounded-lg shadow-lg"
           />
@@ -50,8 +54,8 @@ import Layout from "../../layouts/Layout.astro";
             - side-by-side renders with diffuse, metal and dielectric materials,
             - consistent lighting and camera for fair comparison.
           -->
-          <img
-            src="/src/assets/images/deep-dives/raytracer/cornell_cosine.ppm"
+          <Image
+            src={cornellCosine}
             alt="Material comparison"
             class="w-full rounded-lg shadow-lg"
           />
@@ -75,8 +79,8 @@ import Layout from "../../layouts/Layout.astro";
             - visualize sample distribution or noise patterns across the image,
             - highlight optimisations like importance sampling.
           -->
-          <img
-            src="/src/assets/images/deep-dives/raytracer/cornell_pdf.ppm"
+          <Image
+            src={cornellPdf}
             alt="Sampling noise heatmap"
             class="w-full rounded-lg shadow-lg"
           />

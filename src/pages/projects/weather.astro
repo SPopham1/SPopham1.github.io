@@ -1,5 +1,9 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import metric from "../../assets/images/deep-dives/weather/metric.png";
+import imperial from "../../assets/images/deep-dives/weather/imperial.png";
+import weatherGif from "../../assets/images/deep-dives/weather/use.gif";
+import { Image } from "astro:assets";
 ---
 
 <Layout title="Weather App | Sam Popham" noParticles>
@@ -21,8 +25,8 @@ import Layout from "../../layouts/Layout.astro";
             - grid of weather cards showing temp, icon, brief details for multiple saved locations,
             - clean, accessible typography and consistent iconography.
           -->
-          <img
-            src="/src/assets/images/deep-dives/weather/metric.png"
+          <Image
+            src={metric}
             alt="Multi-location weather cards"
             class="w-full rounded-lg shadow-lg"
           />
@@ -48,8 +52,8 @@ import Layout from "../../layouts/Layout.astro";
             - show search input with live suggestions and keyboard focus,
             - include country codes and highlight matched characters.
           -->
-          <img
-            src="/src/assets/images/deep-dives/weather/imperial.png"
+          <Image
+            src={imperial}
             alt="Autocomplete search"
             class="w-full rounded-lg shadow-lg"
           />
@@ -73,8 +77,8 @@ import Layout from "../../layouts/Layout.astro";
             - show C/F toggle and a progressive loading indicator while fetching data,
             - example of cached result fallback if offline.
           -->
-          <img
-            src="/src/assets/images/deep-dives/weather/use.gif"
+          <Image
+            src={weatherGif}
             alt="Unit toggle and loading"
             class="w-full rounded-lg shadow-lg"
           />

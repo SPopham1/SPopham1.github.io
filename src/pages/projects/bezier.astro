@@ -1,5 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import bezierImg from "../../assets/images/deep-dives/bezier/bezier.png";
+import { Image } from "astro:assets";
 ---
 
 <Layout title="Bezier Curve Visualiser | Sam Popham" noParticles>
@@ -19,8 +21,8 @@ import Layout from "../../layouts/Layout.astro";
         - control polygon with intermediate construction lines, final curve, and UI slider element,
         - show de Casteljau algorithm in action with colors highlighting different levels.
       -->
-      <img
-        src="/src/assets/images/deep-dives/bezier/bezier.png"
+      <Image
+        src={bezierImg}
         alt="Bezier curve visualiser"
         class="w-full rounded-lg shadow-lg"
       />

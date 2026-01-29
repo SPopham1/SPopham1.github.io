@@ -1,5 +1,9 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import listCreation from "../../assets/images/deep-dives/smartshop/list-creation.png";
+import route from "../../assets/images/deep-dives/smartshop/route.png";
+import share from "../../assets/images/deep-dives/smartshop/share.png";
+import { Image } from "astro:assets";
 ---
 
 <Layout title="Smart Shopping Assistant | Sam Popham" noParticles>
@@ -23,8 +27,8 @@ import Layout from "../../layouts/Layout.astro";
             - list with item categories/aisles, checkboxes, and a small map overlay showing the in-store route,
             - bright, mobile-friendly UI with legible typography.
           -->
-          <img
-            src="/src/assets/images/deep-dives/smartshop/list-creation.png"
+          <Image
+            src={listCreation}
             alt="Shopping list UI"
             class="w-full rounded-lg shadow-lg"
           />
@@ -50,8 +54,8 @@ import Layout from "../../layouts/Layout.astro";
             - map with suggested in-store route and stop order to visualise optimisation output,
             - clear path lines and numbered stops.
           -->
-          <img
-            src="/src/assets/images/deep-dives/smartshop/route.png"
+          <Image
+            src={route}
             alt="Route overlay"
             class="w-full rounded-lg shadow-lg"
           />
@@ -75,8 +79,8 @@ import Layout from "../../layouts/Layout.astro";
             - share modal or sync status demonstrating collaborative list features,
             - show collaborators and permission UI.
           -->
-          <img
-            src="/src/assets/images/deep-dives/smartshop/share.png"
+          <Image
+            src={share}
             alt="Share and sync UI"
             class="w-full rounded-lg shadow-lg"
           />

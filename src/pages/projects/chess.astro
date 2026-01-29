@@ -1,5 +1,8 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import initialState from "../../assets/images/deep-dives/chess/initial-state.png";
+import midGame from "../../assets/images/deep-dives/chess/mid-game.png";
+import { Image } from "astro:assets";
 ---
 
 <Layout title="Chess Engine | Sam Popham" noParticles>
@@ -22,8 +25,8 @@ import Layout from "../../layouts/Layout.astro";
             - dark background with coloured node highlights and thin connecting lines,
             - include HUD with nodes/sec and current depth.
           -->
-          <img
-            src="/src/assets/images/deep-dives/chess/initial-state.png"
+          <Image
+            src={initialState}
             alt="Search tree visualization"
             class="w-full rounded-lg shadow-lg"
           />
@@ -49,8 +52,8 @@ import Layout from "../../layouts/Layout.astro";
             - clean board screenshot with highlighted from→to move,
             - evaluation score and short rationale visible nearby.
           -->
-          <img
-            src="/src/assets/images/deep-dives/chess/mid-game.png"
+          <Image
+            src={midGame}
             alt="Sample board with best move"
             class="w-full rounded-lg shadow-lg"
           />

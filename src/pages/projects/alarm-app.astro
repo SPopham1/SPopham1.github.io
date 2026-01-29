@@ -1,5 +1,9 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import alarmList from "../../assets/images/deep-dives/alarm-app/alarm-list.png";
+import createAlarm from "../../assets/images/deep-dives/alarm-app/create-alarm.png";
+import alarmActivation from "../../assets/images/deep-dives/alarm-app/alarm-activation.png";
+import { Image } from "astro:assets";
 ---
 
 <Layout title="Physical Shutoff Alarm App | Sam Popham" noParticles>
@@ -23,8 +27,8 @@ import Layout from "../../layouts/Layout.astro";
             - alarm list with recurrence, snooze options and example settings,
             - clear typographic hierarchy and interactive controls visible.
           -->
-          <img
-            src="/src/assets/images/deep-dives/alarm-app/alarm-list.png"
+          <Image
+            src={alarmList}
             alt="Alarm scheduling UI"
             class="w-full rounded-lg shadow-lg"
           />
@@ -50,8 +54,8 @@ import Layout from "../../layouts/Layout.astro";
             - frame with detected keypoints, confidence masks and pass/fail indicator,
             - show how verification integrates into the alarm flow.
           -->
-          <img
-            src="/src/assets/images/deep-dives/alarm-app/create-alarm.png"
+          <Image
+            src={createAlarm}
             alt="Pose verification overlay"
             class="w-full rounded-lg shadow-lg"
           />
@@ -75,8 +79,8 @@ import Layout from "../../layouts/Layout.astro";
             - settings screen showing backup/restore and storage indicators,
             - highlight offline-first behaviour.
           -->
-          <img
-            src="/src/assets/images/deep-dives/alarm-app/alarm-activation.png"
+          <Image
+            src={alarmActivation}
             alt="Local persistence settings"
             class="w-full rounded-lg shadow-lg"
           />
