@@ -8,89 +8,109 @@ import { Image } from "astro:assets";
 
 <Layout title="Physically Based Raytracer | Sam Popham" noParticles>
   <section class="max-w-6xl mx-auto px-6 py-12">
-    <h1 class="text-4xl font-bold mb-8">
-      Physically Based Raytracer — Deep Dive
-    </h1>
+    <div
+      class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8"
+    >
+      <h1 class="text-4xl font-bold mb-0">
+        Physically Based Raytracer - Deep Dive
+      </h1>
+
+      <a
+        href="https://github.com/SPopham1/Raytracing-in-one-weekend-fork"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 h-12 px-5 bg-gray-900 hover:bg-black text-white dark:bg-white dark:text-black dark:hover:bg-gray-200 rounded-lg font-semibold shadow-md transition whitespace-nowrap"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          class="w-5 h-5 flex-shrink-0"
+        >
+          <path
+            d="M12 2C6.48 2 2 6.58 2 12.26c0 4.54 2.87 8.39 6.84 9.75.5.09.68-.22.68-.49
+    0-.24-.01-.88-.01-1.73-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5
+    -.91-.63.07-.62.07-.62 1.01.07 1.54 1.05 1.54 1.05.9 1.57 2.36 1.12 2.94.86
+    .09-.66.35-1.12.63-1.38-2.22-.26-4.56-1.13-4.56-5.05
+    0-1.12.39-2.04 1.03-2.76-.1-.26-.45-1.3.1-2.72 0 0 .84-.27 2.75 1.05
+    A9.3 9.3 0 0 1 12 6.84c.85.004 1.7.12 2.5.35
+    1.9-1.32 2.74-1.05 2.74-1.05.55 1.42.2 2.46.1 2.72
+    .64.72 1.03 1.64 1.03 2.76 0 3.93-2.34 4.78-4.57 5.04
+    .36.32.68.95.68 1.92 0 1.39-.01 2.51-.01 2.85
+    0 .27.18.59.69.49A10.27 10.27 0 0 0 22 12.26C22 6.58 17.52 2 12 2z"
+          ></path>
+        </svg>
+
+        <span>View Source</span>
+      </a>
+    </div>
 
     <p class="text-gray-600 dark:text-gray-400 mb-6">
-      C++ path tracer exploring sampling, materials and progressive rendering
-      strategies.
+      C++ path tracer exploring sampling, materials, light transport and
+      progressive rendering techniques.
     </p>
 
     <ul class="divide-y divide-gray-200 dark:divide-gray-700">
-      <!-- 1: Progressive sampling sequence (image left) -->
+      {/* 1: Final render (image left) */}
       <li class="flex flex-col md:flex-row items-center gap-8 py-12">
         <figure class="md:w-1/2 w-full">
-          <!--
-            Image guidance:
-            Progressive sampling sequence:
-            - grid showing the same scene at increasing sample counts (noisy -> clean),
-            - annotate sample counts and timing where possible.
-          -->
           <Image
             src={finished}
-            alt="Progressive sampling sequence"
+            alt="Final raytraced render"
             class="w-full rounded-lg shadow-lg"
           />
         </figure>
 
         <article class="md:w-1/2 w-full">
-          <h2 class="text-2xl font-semibold mb-3">Progressive Sampling</h2>
+          <h2 class="text-2xl font-semibold mb-3">Final Render Output</h2>
           <p class="text-gray-600 dark:text-gray-400">
-            See noise reduce as samples increase — useful to compare sampling
-            strategies and denoisers.
+            A fully converged render demonstrating global illumination, soft
+            shadows, reflections, and realistic material response using Monte
+            Carlo path tracing.
           </p>
         </article>
       </li>
 
-      <!-- 2: Material/BRDF comparison (image right) -->
+      {/* 2: Cosine-weighted sampling (image right) */}
       <li
         class="flex flex-col md:flex-row md:flex-row-reverse items-center gap-8 py-12"
       >
         <figure class="md:w-1/2 w-full">
-          <!--
-            Image guidance:
-            Material comparison:
-            - side-by-side renders with diffuse, metal and dielectric materials,
-            - consistent lighting and camera for fair comparison.
-          -->
           <Image
             src={cornellCosine}
-            alt="Material comparison"
+            alt="Cosine-weighted sampling render"
             class="w-full rounded-lg shadow-lg"
           />
         </figure>
 
         <article class="md:w-1/2 w-full">
-          <h2 class="text-2xl font-semibold mb-3">Material & BRDFs</h2>
+          <h2 class="text-2xl font-semibold mb-3">Cosine-Weighted Sampling</h2>
           <p class="text-gray-600 dark:text-gray-400">
-            Compare how different BRDFs respond to lighting — critical for
-            realistic materials.
+            Demonstrates cosine-weighted hemisphere sampling for diffuse
+            surfaces, reducing variance compared to uniform sampling and
+            improving convergence in indirectly lit areas.
           </p>
         </article>
       </li>
 
-      <!-- 3: Sampling/noise heatmap (image left) -->
+      {/* 3: PDF / importance sampling comparison (image left) */}
       <li class="flex flex-col md:flex-row items-center gap-8 py-12">
         <figure class="md:w-1/2 w-full">
-          <!--
-            Image guidance:
-            Sampling/noise heatmap:
-            - visualize sample distribution or noise patterns across the image,
-            - highlight optimisations like importance sampling.
-          -->
           <Image
             src={cornellPdf}
-            alt="Sampling noise heatmap"
+            alt="Importance sampling / PDF visualisation"
             class="w-full rounded-lg shadow-lg"
           />
         </figure>
 
         <article class="md:w-1/2 w-full">
-          <h2 class="text-2xl font-semibold mb-3">Sampling & Noise</h2>
+          <h2 class="text-2xl font-semibold mb-3">
+            Importance Sampling & PDFs
+          </h2>
           <p class="text-gray-600 dark:text-gray-400">
-            Visualising noise and sample distribution helps diagnose variance
-            and optimise sampling strategies.
+            Visualisation of probability density functions used for importance
+            sampling light sources and BRDFs, helping concentrate rays where
+            they contribute most and significantly reduce noise.
           </p>
         </article>
       </li>

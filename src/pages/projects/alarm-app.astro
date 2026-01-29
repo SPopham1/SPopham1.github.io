@@ -9,7 +9,7 @@ import { Image } from "astro:assets";
 <Layout title="Physical Shutoff Alarm App | Sam Popham" noParticles>
   <section class="max-w-6xl mx-auto px-6 py-12">
     <h1 class="text-4xl font-bold mb-8">
-      Physical Shutoff Alarm App — Deep Dive
+      Physical Shutoff Alarm App - Deep Dive
     </h1>
 
     <p class="text-gray-600 dark:text-gray-400 mb-6">
@@ -17,80 +17,79 @@ import { Image } from "astro:assets";
       with an offline-first design.
     </p>
 
+    {/* Still Developing Warning */}
+    <div
+      class="mt-16 bg-yellow-100 dark:bg-yellow-900/40 border border-yellow-300 dark:border-yellow-700 rounded-lg p-5 text-center"
+    >
+      <p class="text-yellow-800 dark:text-yellow-200 font-semibold">
+        🚧 This project is still actively in development.
+      </p>
+      <p class="text-yellow-700 dark:text-yellow-300 text-sm mt-1">
+        Features, UI, and verification models are being refined and expanded.
+      </p>
+    </div>
+
     <ul class="divide-y divide-gray-200 dark:divide-gray-700">
-      <!-- 1: Alarm scheduling UI (image left) -->
+      {/* 1: Alarm list (image left) */}
       <li class="flex flex-col md:flex-row items-center gap-8 py-12">
         <figure class="md:w-1/2 w-full">
-          <!--
-            Image guidance:
-            Alarm scheduling UI:
-            - alarm list with recurrence, snooze options and example settings,
-            - clear typographic hierarchy and interactive controls visible.
-          -->
           <Image
             src={alarmList}
-            alt="Alarm scheduling UI"
+            alt="Alarm list interface"
             class="w-full rounded-lg shadow-lg"
           />
         </figure>
 
         <article class="md:w-1/2 w-full">
-          <h2 class="text-2xl font-semibold mb-3">Alarm Scheduling</h2>
+          <h2 class="text-2xl font-semibold mb-3">Alarm Overview</h2>
           <p class="text-gray-600 dark:text-gray-400">
-            Design for reliability: recurring schedules, robust notifications
-            and sensible defaults to avoid missed events.
+            A clear overview of all scheduled alarms, including recurrence,
+            labels, and quick access to edit or disable alarms - designed to
+            reduce mistakes and make time management effortless.
           </p>
         </article>
       </li>
 
-      <!-- 2: Pose-detection verification (image right) -->
+      {/* 2: Create alarm screen (image right) */}
       <li
         class="flex flex-col md:flex-row md:flex-row-reverse items-center gap-8 py-12"
       >
         <figure class="md:w-1/2 w-full">
-          <!--
-            Image guidance:
-            Pose-detection verification overlay:
-            - frame with detected keypoints, confidence masks and pass/fail indicator,
-            - show how verification integrates into the alarm flow.
-          -->
           <Image
             src={createAlarm}
-            alt="Pose verification overlay"
+            alt="Create alarm screen"
             class="w-full rounded-lg shadow-lg"
           />
         </figure>
 
         <article class="md:w-1/2 w-full">
-          <h2 class="text-2xl font-semibold mb-3">Pose Verification</h2>
+          <h2 class="text-2xl font-semibold mb-3">Alarm Creation</h2>
           <p class="text-gray-600 dark:text-gray-400">
-            Lightweight pose checks confirm user activity while protecting
-            battery life — verification that actually verifies.
+            Flexible alarm setup with intuitive controls for time, repetition,
+            and behaviour. Sensible defaults help users create reliable alarms
+            in seconds without digging through complex settings.
           </p>
         </article>
       </li>
 
-      <!-- 3: Local-persistence snapshot (image left) -->
+      {/* 3: Alarm activation / verification (image left) */}
       <li class="flex flex-col md:flex-row items-center gap-8 py-12">
         <figure class="md:w-1/2 w-full">
-          <!--
-            Image guidance:
-            Local persistence/settings screenshot:
-            - settings screen showing backup/restore and storage indicators,
-            - highlight offline-first behaviour.
-          -->
           <Image
             src={alarmActivation}
-            alt="Local persistence settings"
+            alt="Alarm activation and verification"
             class="w-full rounded-lg shadow-lg"
           />
         </figure>
 
         <article class="md:w-1/2 w-full">
-          <h2 class="text-2xl font-semibold mb-3">Local Persistence</h2>
+          <h2 class="text-2xl font-semibold mb-3">
+            Alarm Activation & Verification
+          </h2>
           <p class="text-gray-600 dark:text-gray-400">
-            Offline-first storage ensures alarms survive device restarts and
-            network outages — safety without surprises.
+            When the alarm triggers, the app uses on-device pose verification to
+            confirm the user is physically active before allowing dismissal -
+            turning alarms into actions, not just sounds.
           </p>
         </article>
       </li>

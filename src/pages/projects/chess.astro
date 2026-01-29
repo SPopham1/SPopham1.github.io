@@ -7,12 +7,59 @@ import { Image } from "astro:assets";
 
 <Layout title="Chess Engine | Sam Popham" noParticles>
   <section class="max-w-6xl mx-auto px-6 py-12">
-    <h1 class="text-4xl font-bold mb-8">Chess Engine — Deep Dive</h1>
+    <div
+      class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8"
+    >
+      <h1 class="text-4xl font-bold leading-tight">Chess Engine - Deep Dive</h1>
+
+      <a
+        href="https://github.com/SPopham1/chessbot"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 h-12 px-5 bg-gray-900 hover:bg-black text-white dark:bg-white dark:text-black dark:hover:bg-gray-200 rounded-lg font-semibold shadow-md transition whitespace-nowrap"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          class="w-5 h-5 flex-shrink-0"
+        >
+          <path
+            d="M12 2C6.48 2 2 6.58 2 12.26c0 4.54 2.87 8.39 6.84 9.75.5.09.68-.22.68-.49
+      0-.24-.01-.88-.01-1.73-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5
+      -.91-.63.07-.62.07-.62 1.01.07 1.54 1.05 1.54 1.05.9 1.57 2.36 1.12 2.94.86
+      .09-.66.35-1.12.63-1.38-2.22-.26-4.56-1.13-4.56-5.05
+      0-1.12.39-2.04 1.03-2.76-.1-.26-.45-1.3.1-2.72 0 0 .84-.27 2.75 1.05
+      A9.3 9.3 0 0 1 12 6.84c.85.004 1.7.12 2.5.35
+      1.9-1.32 2.74-1.05 2.74-1.05.55 1.42.2 2.46.1 2.72
+      .64.72 1.03 1.64 1.03 2.76 0 3.93-2.34 4.78-4.57 5.04
+      .36.32.68.95.68 1.92 0 1.39-.01 2.51-.01 2.85
+      0 .27.18.59.69.49A10.27 10.27 0 0 0 22 12.26C22 6.58 17.52 2 12 2z"
+          ></path>
+        </svg>
+
+        <span>View Source</span>
+      </a>
+    </div>
 
     <p class="text-gray-600 dark:text-gray-400 mb-6">
-      A high-performance chess engine written in Python emphasising search
-      efficiency and reproducibility.
+      A deterministic chess engine written in Python, focused on efficient
+      game-tree search, strong move ordering, and reproducible evaluation. The
+      project explores practical adversarial search techniques used in modern
+      engines.
     </p>
+
+    {/* Still Developing Warning */}
+    <div
+      class="mt-16 bg-yellow-100 dark:bg-yellow-900/40 border border-yellow-300 dark:border-yellow-700 rounded-lg p-5 text-center"
+    >
+      <p class="text-yellow-800 dark:text-yellow-200 font-semibold">
+        🚧 This project is still actively in development.
+      </p>
+      <p class="text-yellow-700 dark:text-yellow-300 text-sm mt-1">
+        Speed, GUI, and Intelligence are being refined and expanded.
+      </p>
+    </div>
 
     <ul class="divide-y divide-gray-200 dark:divide-gray-700">
       <!-- 1: Search tree visualization (image left) -->
@@ -35,8 +82,12 @@ import { Image } from "astro:assets";
         <article class="md:w-1/2 w-full">
           <h2 class="text-2xl font-semibold mb-3">Search Tree Visualization</h2>
           <p class="text-gray-600 dark:text-gray-400">
-            Explore nodes and principal variations — see where pruning trims the
-            branches and how the engine focuses its search.
+            The engine’s decision process is exposed through a live search-tree
+            view. Nodes represent evaluated positions, while edges represent
+            legal moves. Principal variation paths are highlighted, making it
+            clear where the engine expects the strongest continuation.
+            Alpha-beta cutoffs are visible as pruned branches, demonstrating how
+            search space is reduced without affecting optimal play.
           </p>
         </article>
       </li>
@@ -64,8 +115,11 @@ import { Image } from "astro:assets";
             Sample Position & Best Move
           </h2>
           <p class="text-gray-600 dark:text-gray-400">
-            A concrete example showing the engine's chosen move and a short
-            explanation — checkmate your doubts with evidence.
+            For any given board state, the engine evaluates candidate moves
+            using a static evaluation function combined with deep search. The
+            chosen move is supported by a numerical evaluation score and
+            principal variation line, showing not just what the engine plays,
+            but why. This makes engine behaviour transparent and testable.
           </p>
         </article>
       </li>
@@ -74,21 +128,24 @@ import { Image } from "astro:assets";
     <!-- Text-only sections for additional concepts -->
     <div class="max-w-4xl mx-auto space-y-8 mt-12">
       <article>
-        <h2 class="text-2xl font-semibold mb-3">Move-Order Heatmap</h2>
+        <h2 class="text-2xl font-semibold mb-3">Move Ordering Analysis</h2>
         <p class="text-gray-600 dark:text-gray-400">
-          Visualise how move ordering affects efficiency — because ordering
-          matters when you want to be first in 'line'. A horizontal move list
-          with colour-coded scores and timings highlights best moves and shows
-          the ordering impact on node counts.
+          Efficient move ordering is critical for alpha-beta pruning
+          performance. This visualisation shows how candidate moves are
+          prioritised using heuristics such as captures, checks, and historical
+          success. Colour-coded timing and score data reveal how good ordering
+          dramatically reduces the number of nodes searched.
         </p>
       </article>
 
       <article>
         <h2 class="text-2xl font-semibold mb-3">Performance Benchmarks</h2>
         <p class="text-gray-600 dark:text-gray-400">
-          Compare nodes/sec across depths — faster searches let you go deeper,
-          so benchmark early and often. Clean line/area charts compare tuning
-          runs with labelled axes, legend, and annotations.
+          Benchmarking measures nodes searched per second across increasing
+          depths. These results demonstrate how pruning, ordering heuristics,
+          and evaluation efficiency impact scalability. The data highlights
+          trade-offs between deeper search and computational cost - a core
+          challenge in engine design.
         </p>
       </article>
     </div>
