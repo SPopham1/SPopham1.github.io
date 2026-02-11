@@ -3,7 +3,7 @@
 .sidebar-link {
   @apply flex flex-col items-center gap-1
          text-xs text-gray-600 dark:text-gray-400
-         no-underline py-4 w-full
+         no-underline py-4
          transition-colors duration-200;
 }
 
@@ -30,4 +30,327 @@ section {
 
 .project-card.active-hover .group-hover\:scale-105 {
   transform: scale(1.05);
+}
+
+/* ========================================== */
+/* PROJECTS DROPDOWN NAVIGATION               */
+/* ========================================== */
+
+.projects-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.projects-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 0;
+  position: relative;
+}
+
+.projects-header .sidebar-link {
+  @apply py-4;
+  /* Remove flex to match other sidebar links exactly */
+}
+
+/* -------------------- */
+/* Expandable Spine     */
+/* -------------------- */
+
+.projects-gutter {
+  position: absolute;
+  left: 0px; /* Position to the left of the button */
+  top: 0;
+  height: 100%;
+  width: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 1rem;
+  pointer-events: none; /* Let clicks pass through to button */
+}
+
+.projects-line {
+  width: 2px;
+  height: 20px;
+  border: none;
+  background: linear-gradient(
+    to bottom,
+    rgb(107 114 128 / 0.6),
+    rgb(107 114 128 / 0.3)
+  );
+  cursor: pointer;
+  pointer-events: all; /* But make the line itself clickable */
+  transition:
+    height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+  border-radius: 1px;
+}
+
+/* Hover effect when collapsed */
+.projects-wrapper:not(.expanded) .projects-line:hover {
+  background: linear-gradient(
+    to bottom,
+    rgb(59 130 246 / 0.7),
+    rgb(59 130 246 / 0.4)
+  );
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.4);
+}
+
+/* Expanded state - grows downward to match tree height */
+.projects-wrapper.expanded .projects-line {
+  height: 200px; /* Will extend down to cover tree */
+  background: linear-gradient(
+    to bottom,
+    rgb(59 130 246 / 0.6) 0%,
+    rgb(59 130 246 / 0.4) 20%,
+    rgb(107 114 128 / 0.3) 100%
+  );
+}
+
+/* Pulsing animation when collapsed */
+@keyframes spine-pulse {
+  0%,
+  100% {
+    opacity: 0.4;
+    box-shadow: 0 0 0 rgba(59, 130, 246, 0);
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 8px rgba(59, 130, 246, 0.5);
+  }
+}
+
+.projects-wrapper:not(.expanded) .projects-line {
+  animation: spine-pulse 2s ease-in-out infinite;
+}
+
+/* -------------------- */
+/* Tree Container       */
+/* -------------------- */
+
+.projects-tree {
+  width: 100%;
+  padding-left: 1.5rem;
+  position: relative;
+
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+
+  transition:
+    max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.35s ease 0.1s;
+}
+
+/* Expanded state */
+.projects-wrapper.expanded .projects-tree {
+  max-height: 600px;
+  opacity: 1;
+}
+
+/* -------------------- */
+/* Tree Items           */
+/* -------------------- */
+
+.tree-item {
+  position: relative;
+  display: block;
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
+  font-size: 0.7rem;
+  color: rgb(107 114 128);
+  text-decoration: none;
+
+  /* Truncate long text */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+
+  transform: translateX(-8px);
+  opacity: 0;
+
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.2s ease,
+    padding-left 0.2s ease;
+}
+
+/* Stagger animation delay for each item */
+.tree-item:nth-child(1) {
+  transition-delay: 0.05s;
+}
+.tree-item:nth-child(2) {
+  transition-delay: 0.1s;
+}
+.tree-item:nth-child(3) {
+  transition-delay: 0.15s;
+}
+.tree-item:nth-child(4) {
+  transition-delay: 0.2s;
+}
+.tree-item:nth-child(5) {
+  transition-delay: 0.25s;
+}
+.tree-item:nth-child(6) {
+  transition-delay: 0.3s;
+}
+.tree-item:nth-child(7) {
+  transition-delay: 0.35s;
+}
+.tree-item:nth-child(8) {
+  transition-delay: 0.4s;
+}
+
+/* Tooltip for full project name on hover */
+.tree-item::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: rgb(31 41 55);
+  color: white;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  border-radius: 0.375rem;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1000;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  transition: opacity 0.2s ease;
+}
+
+.tree-item:hover::after {
+  opacity: 1;
+}
+
+/* Don't show tooltip on active items (they already have the dot) */
+.tree-item.active::after {
+  display: none;
+}
+.tree-item::before {
+  content: "";
+  position: absolute;
+  left: -1rem; /* Connects back to the spine on the left */
+  top: 50%;
+  width: 1rem;
+  border-top: 1px solid rgba(107, 114, 128, 0.4);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+/* Expanded state - fade items in */
+.projects-wrapper.expanded .tree-item {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Hover state */
+.tree-item:hover {
+  color: rgb(59 130 246);
+  padding-left: 1.25rem;
+}
+
+.tree-item:hover::before {
+  border-top-color: rgb(59 130 246 / 0.6);
+}
+
+/* -------------------- */
+/* Active Project State */
+/* -------------------- */
+
+.tree-item.active {
+  font-weight: 600;
+  color: rgb(59 130 246);
+  padding-left: 1.25rem;
+}
+
+.tree-item.active::before {
+  border-top-color: rgb(59 130 246);
+  border-top-width: 2px;
+  /* Add a glowing dot at the spine connection point */
+  box-shadow:
+    -1rem 0 0 3px rgb(59 130 246),
+    -1rem 0 0 5px rgb(219 234 254),
+    -1rem 0 8px 3px rgba(59, 130, 246, 0.4);
+  animation: dot-pulse 2s ease-in-out infinite;
+}
+
+@keyframes dot-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 8px rgba(59, 130, 246, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 16px rgba(59, 130, 246, 0.8);
+  }
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .tree-item.active::after {
+    border-color: rgb(30 58 138);
+  }
+
+  .projects-line {
+    background: linear-gradient(
+      to bottom,
+      rgb(156 163 175 / 0.5),
+      rgb(156 163 175 / 0.2)
+    );
+  }
+
+  .projects-wrapper.expanded .projects-line {
+    background: linear-gradient(
+      to bottom,
+      rgb(96 165 250 / 0.6),
+      rgb(156 163 175 / 0.3)
+    );
+  }
+}
+
+/* -------------------- */
+/* Nav Row Layout       */
+/* -------------------- */
+
+.nav-row {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+/* -------------------- */
+/* Accessibility        */
+/* -------------------- */
+
+.projects-line:focus-visible {
+  outline: 2px solid rgb(59 130 246);
+  outline-offset: 2px;
+}
+
+.tree-item:focus-visible {
+  outline: 2px solid rgb(59 130 246);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .projects-line,
+  .projects-tree,
+  .tree-item {
+    transition-duration: 0.01ms !important;
+    animation: none !important;
+  }
 }

@@ -8,7 +8,7 @@ if (!gl) {
 let aspect = window.innerWidth / window.innerHeight;
 let isDark = true;
 const particles = [];
-const numParticles = 50;
+const numParticles = 500;
 let mouseX = 0;
 let mouseY = 0;
 let time = 0;

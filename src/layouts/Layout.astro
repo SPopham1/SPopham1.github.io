@@ -5,12 +5,18 @@ import { Image } from "astro:assets";
 
 import avatarImg from "../assets/images/avatar.JPG";
 
+interface Project {
+  title: string;
+  link?: string;
+}
+
 interface Props {
   title: string;
   noParticles?: boolean;
+  projects?: Project[];
 }
 
-const { title, noParticles = false } = Astro.props;
+const { title, noParticles = true, projects = [] } = Astro.props;
 ---
 
 <!doctype html>
@@ -87,6 +93,7 @@ const { title, noParticles = false } = Astro.props;
             border-r border-gray-200 dark:border-gray-700
             hidden md:flex flex-col items-center py-6
             z-30"
+      aria-label="Main navigation"
     >
       <!-- Avatar -->
       <Image
@@ -99,25 +106,95 @@ const { title, noParticles = false } = Astro.props;
       />
 
       <!-- Links -->
-      <a href="#top" class="sidebar-link">
-        <i class="fa-solid fa-house"></i>
+      <a href="/" class="sidebar-link" data-home aria-label="Navigate to home">
+        <i class="fa-solid fa-house" aria-hidden="true"></i>
         <span>Home</span>
       </a>
 
-      <a href="#skills" class="sidebar-link">
-        <i class="fa-solid fa-layer-group"></i>
+      <a
+        href="/#skills"
+        class="sidebar-link"
+        aria-label="Navigate to skills section"
+      >
+        <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
         <span>Skills</span>
       </a>
 
-      <a href="#contact" class="sidebar-link">
-        <i class="fa-solid fa-envelope"></i>
+      <a
+        href="/#contact"
+        class="sidebar-link"
+        aria-label="Navigate to contact section"
+      >
+        <i class="fa-solid fa-envelope" aria-hidden="true"></i>
         <span>Contact</span>
       </a>
 
-      <a href="#projects" class="sidebar-link">
-        <i class="fa-solid fa-code"></i>
-        <span>Projects</span>
-      </a>
+      <!-- Projects Section with Dropdown -->
+      <div
+        class="projects-wrapper"
+        role="region"
+        aria-label="Projects navigation"
+      >
+        <div class="nav-row projects-header">
+          <!-- Expandable spine toggle - LEFT SIDE -->
+          <div class="projects-gutter">
+            <button
+              class="projects-line"
+              data-projects-toggle
+              aria-expanded="false"
+              aria-label="Toggle projects list"
+              aria-controls="projects-tree"
+              title="Click to expand/collapse projects"></button>
+          </div>
+
+          <!-- Projects main link - RIGHT SIDE -->
+          <a
+            href="/#projects"
+            class="sidebar-link projects-link"
+            data-projects-link
+            aria-label="Navigate to projects section"
+          >
+            <i class="fa-solid fa-code" aria-hidden="true"></i>
+            <span>Projects</span>
+          </a>
+        </div>
+
+        <!-- Expandable tree of project links -->
+        <div
+          class="projects-tree"
+          id="projects-tree"
+          role="navigation"
+          aria-label="Individual projects"
+        >
+          {
+            projects
+              .filter((project) => project.link) // Only show projects with links
+              .map((project) => {
+                // Extract slug from link (e.g., "/projects/chess" -> "chess")
+                const slug = project.link?.split("/").pop() || "";
+
+                // Create shortened version for display
+                const shortName =
+                  project.title.length > 15
+                    ? project.title.substring(0, 14) + "..."
+                    : project.title;
+
+                return (
+                  <a
+                    href={project.link}
+                    class="tree-item"
+                    data-project={slug}
+                    data-tooltip={project.title}
+                    aria-label={`View ${project.title} project`}
+                    title={project.title}
+                  >
+                    {shortName}
+                  </a>
+                );
+              })
+          }
+        </div>
+      </div>
     </nav>
 
     <!-- Title bar -->
@@ -130,9 +207,12 @@ const { title, noParticles = false } = Astro.props;
         <a
           href="/Sam_Popham_CV.pdf"
           download
-          class="ml-4 inline-flex items-center px-3 py-1.5 rounded-md bg-blue-600 text-white text-sm font-medium hover:bg-blue-500"
-          >Download CV</a
+          class="ml-4 inline-flex items-center px-3 py-1.5 rounded-md bg-blue-600 text-white text-sm font-medium hover:bg-blue-500 transition-colors duration-200"
+          aria-label="Download CV as PDF"
         >
+          <i class="fa-solid fa-download mr-2" aria-hidden="true"></i>
+          Download CV
+        </a>
       </div>
     </header>
 
@@ -142,5 +222,137 @@ const { title, noParticles = false } = Astro.props;
     </main>
 
     {!noParticles && <script src="/scripts/particles.js" defer />}
+
+    <script>
+      // Enhanced projects dropdown functionality
+      const wrapper = document.querySelector(".projects-wrapper");
+      const toggle = document.querySelector("[data-projects-toggle]");
+      const tree = document.querySelector("#projects-tree");
+      const treeItems = document.querySelectorAll(".tree-item");
+      const projectsLink = document.querySelector("[data-projects-link]");
+      const projectsLine = document.querySelector(".projects-line");
+
+      // State management
+      let isExpanded = false;
+
+      // Update spine height to match tree
+      function updateSpineHeight() {
+        if (isExpanded && tree) {
+          const treeHeight = tree.scrollHeight;
+          const buttonHeight = 64; // Approximate button height
+          const totalHeight = buttonHeight + treeHeight;
+          projectsLine.style.height = `${totalHeight}px`;
+        } else {
+          projectsLine.style.height = "20px";
+        }
+      }
+
+      // Toggle dropdown
+      function toggleProjects(expand) {
+        if (expand === undefined) {
+          isExpanded = !isExpanded;
+        } else {
+          isExpanded = expand;
+        }
+
+        wrapper.classList.toggle("expanded", isExpanded);
+        toggle.setAttribute("aria-expanded", String(isExpanded));
+
+        // Update spine height after animation starts
+        setTimeout(updateSpineHeight, 50);
+
+        // Save state to sessionStorage
+        sessionStorage.setItem("projectsExpanded", String(isExpanded));
+      }
+
+      // Click handler for toggle button
+      toggle?.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleProjects();
+      });
+
+      // Keyboard support for toggle
+      toggle?.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          toggleProjects();
+        }
+      });
+
+      // Smooth scroll on home page
+      projectsLink?.addEventListener("click", (e) => {
+        if (window.location.pathname === "/") {
+          e.preventDefault();
+          const projectsSection = document.getElementById("projects");
+          if (projectsSection) {
+            projectsSection.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        }
+      });
+
+      // Auto-expand logic
+      function initializeProjectsState() {
+        const path = window.location.pathname;
+        const savedState = sessionStorage.getItem("projectsExpanded");
+
+        // Auto-expand if on a project page
+        if (path.startsWith("/projects/")) {
+          toggleProjects(true);
+
+          // Highlight active project
+          treeItems.forEach((item) => {
+            const projectSlug = item.dataset.project;
+            if (projectSlug && path.includes(projectSlug)) {
+              item.classList.add("active");
+
+              // Ensure it's visible (scroll into view if needed)
+              setTimeout(() => {
+                item.scrollIntoView({
+                  behavior: "smooth",
+                  block: "nearest",
+                });
+              }, 300);
+            }
+          });
+        }
+        // Restore previous state if available
+        else if (savedState === "true") {
+          toggleProjects(true);
+        }
+      }
+
+      // Initialize on page load
+      document.addEventListener("DOMContentLoaded", initializeProjectsState);
+
+      // Update spine height on window resize
+      window.addEventListener("resize", () => {
+        if (isExpanded) {
+          updateSpineHeight();
+        }
+      });
+
+      // Handle navigation highlighting
+      function updateActiveNavLink() {
+        const currentPath = window.location.pathname;
+        const currentHash = window.location.hash;
+
+        document.querySelectorAll(".sidebar-link").forEach((link) => {
+          const href = link.getAttribute("href");
+          if (href === currentPath || href === currentPath + currentHash) {
+            link.classList.add("text-blue-600", "dark:text-blue-400");
+          } else {
+            link.classList.remove("text-blue-600", "dark:text-blue-400");
+          }
+        });
+      }
+
+      // Update on navigation
+      window.addEventListener("hashchange", updateActiveNavLink);
+      window.addEventListener("load", updateActiveNavLink);
+    </script>
   </body>
 </html>
