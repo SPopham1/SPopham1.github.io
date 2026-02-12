@@ -1,0 +1,143 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import projects from "../../data/projects";
+import bezierImg from "../../assets/images/deep-dives/visual/bezier.png";
+import flatShading from "../../assets/images/deep-dives/visual/flat-shading.gif";
+import smoothShading from "../../assets/images/deep-dives/visual/smooth-shading.gif";
+import { Image } from "astro:assets";
+---
+
+<Layout
+  title="Visual Computing Projects | Sam Popham"
+  noParticles
+  projects={projects}
+>
+  <section class="max-w-6xl
+  mx-auto
+  px-6
+  py-12">
+    <!-- HEADER -->
+    <div class="mb-12">
+      <h1 class="text-4xl font-bold mb-4">Visual Computing Projects</h1>
+
+      <p class="text-gray-600 dark:text-gray-400 max-w-3xl">
+        A collection of visual computing projects exploring real-time rendering,
+        shader programming, geometric algorithms, and interactive graphics using
+        WebGL and GPU pipelines.
+      </p>
+    </div>
+
+    <!-- PROJECT LIST -->
+    <ul class="divide-y divide-gray-200 dark:divide-gray-700">
+      <!-- ================= BEZIER ================= -->
+      <li class="flex flex-col md:flex-row items-center gap-10 py-14">
+        <figure class="md:w-1/2 w-full">
+          <Image
+            src={bezierImg}
+            alt="Bezier curve visualiser"
+            class="w-full rounded-lg shadow-lg"
+          />
+        </figure>
+
+        <article class="md:w-1/2 w-full">
+          <h2 class="text-2xl font-semibold mb-3">Bézier Curve Visualiser</h2>
+
+          <p class="text-gray-600 dark:text-gray-400 mb-4">
+            An interactive WebGL tool for constructing Bézier curves using de
+            Casteljau’s algorithm. Control points can be moved in real time
+            while the curve updates dynamically.
+          </p>
+
+          <p class="text-gray-600 dark:text-gray-400">
+            The project demonstrates recursive geometric interpolation, curve
+            subdivision, and efficient GPU rendering using dynamic vertex
+            buffers.
+          </p>
+        </article>
+      </li>
+
+      <!-- ================= FLAT SHADING ================= -->
+      <li
+        class="flex flex-col md:flex-row md:flex-row-reverse items-center gap-10 py-14"
+      >
+        <figure class="md:w-1/2 w-full">
+          <img
+            src={flatShading.src}
+            alt="Flat shaded teapot"
+            class="w-full rounded-lg shadow-lg"
+          />
+        </figure>
+
+        <article class="md:w-1/2 w-full">
+          <h2 class="text-2xl font-semibold mb-3">Flat Shading in WebGL</h2>
+
+          <p class="text-gray-600 dark:text-gray-400 mb-4">
+            Implemented the Phong lighting model within a vertex shader to
+            render a Utah Teapot using per-vertex lighting.
+          </p>
+
+          <p class="text-gray-600 dark:text-gray-400">
+            Shared triangle normals produce a faceted appearance, demonstrating
+            core concepts of lighting computation, vector normalisation, and the
+            WebGL rendering pipeline.
+          </p>
+        </article>
+      </li>
+
+      <!-- ================= SMOOTH SHADING ================= -->
+      <li class="flex flex-col md:flex-row items-center gap-10 py-14">
+        <figure class="md:w-1/2 w-full">
+          <img
+            src={smoothShading.src}
+            alt="Smooth shaded teapot"
+            class="w-full rounded-lg shadow-lg"
+          />
+        </figure>
+
+        <article class="md:w-1/2 w-full">
+          <h2 class="text-2xl font-semibold mb-3">Smooth Fragment Shading</h2>
+
+          <p class="text-gray-600 dark:text-gray-400 mb-4">
+            Extended the pipeline by moving lighting calculations into the
+            fragment shader and computing averaged vertex normals across
+            adjacent triangles.
+          </p>
+
+          <p class="text-gray-600 dark:text-gray-400">
+            This produces smooth shading and realistic specular highlights,
+            showing the difference between per-vertex and per-fragment
+            illumination models.
+          </p>
+        </article>
+      </li>
+    </ul>
+
+    <!-- SKILLS -->
+    <div class="mt-16 max-w-4xl">
+      <h2 class="text-2xl font-semibold mb-4">
+        Core Visual Computing Skills Demonstrated
+      </h2>
+
+      <ul class="list-disc pl-6 text-gray-600 dark:text-gray-400 space-y-2">
+        <li>WebGL graphics pipeline implementation</li>
+        <li>GLSL shader programming</li>
+        <li>Phong lighting & illumination models</li>
+        <li>Normal computation & surface smoothing</li>
+        <li>Interactive geometric visualisation</li>
+      </ul>
+    </div>
+
+    <!-- ================= FUTURE WORK ================= -->
+    <div class="mt-16 max-w-4xl">
+      <h2 class="text-2xl font-semibold mb-4">Future Work</h2>
+
+      <ul class="list-disc pl-6 text-gray-600 dark:text-gray-400 space-y-2">
+        <li>Develop a custom WebGL shader playground</li>
+        <li>Implement real-time vertex & fragment shader editing</li>
+        <li>Add interactive lighting and camera controls</li>
+        <li>Support multiple 3D models for rendering experiments</li>
+        <li>Provide shader debugging and error feedback tools</li>
+      </ul>
+    </div>
+  </section>
+</Layout>

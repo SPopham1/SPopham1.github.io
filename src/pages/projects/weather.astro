@@ -1,13 +1,17 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import projects from "../../data/projects";
 import metric from "../../assets/images/deep-dives/weather/metric.png";
 import imperial from "../../assets/images/deep-dives/weather/imperial.png";
 import weatherGif from "../../assets/images/deep-dives/weather/use.gif";
 import { Image } from "astro:assets";
 ---
 
-<Layout title="Weather App | Sam Popham" noParticles>
-  <section class="max-w-6xl mx-auto px-6 py-12">
+<Layout title="Weather App | Sam Popham" noParticles projects={projects}>
+  <section class="max-w-6xl
+  mx-auto
+  px-6
+  py-12">
     <div
       class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8"
     >

@@ -1,12 +1,16 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import projects from "../../data/projects";
 import initialState from "../../assets/images/deep-dives/chess/initial-state.png";
 import midGame from "../../assets/images/deep-dives/chess/mid-game.png";
 import { Image } from "astro:assets";
 ---
 
-<Layout title="Chess Engine | Sam Popham" noParticles>
-  <section class="max-w-6xl mx-auto px-6 py-12">
+<Layout title="Chess Engine | Sam Popham" noParticles projects={projects}>
+  <section class="max-w-6xl
+  mx-auto
+  px-6
+  py-12">
     <div
       class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8"
     >

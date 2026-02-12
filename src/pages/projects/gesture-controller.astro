@@ -1,11 +1,19 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import projects from "../../data/projects";
 import gestureDemo from "../../assets/images/deep-dives/gesture/up-down-use.gif";
 import { Image } from "astro:assets";
 ---
 
-<Layout title="Gesture Volume Controller | Sam Popham" noParticles>
-  <section class="max-w-6xl mx-auto px-6 py-12">
+<Layout
+  title="Gesture Volume Controller | Sam Popham"
+  noParticles
+  projects={projects}
+>
+  <section class="max-w-6xl
+  mx-auto
+  px-6
+  py-12">
     <div
       class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8"
     >
@@ -106,5 +114,6 @@ import { Image } from "astro:assets";
       </article>
     </div>
   </section>
+
+  >
 </Layout>
->

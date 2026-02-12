@@ -88,78 +88,73 @@ const { title, noParticles = true, projects = [] } = Astro.props;
 
     <!-- Sidebar (desktop only) -->
     <nav
-      class="fixed top-14 left-0 h-[calc(100vh-3.5rem)] w-20
+      class="fixed top-14 left-0 h-[calc(100vh-3.5rem)] w-20 transition-all duration-300
             bg-light/80 dark:bg-dark/80 backdrop-blur-xl
             border-r border-gray-200 dark:border-gray-700
-            hidden md:flex flex-col items-center py-6
+            hidden md:flex flex-col items-start py-6
             z-30"
       aria-label="Main navigation"
+      id="main-nav"
     >
-      <!-- Avatar -->
-      <Image
-        src={avatarImg}
-        alt="Sam Popham"
-        width={48}
-        height={48}
-        loading="eager"
-        class="rounded-full mb-8 border border-gray-300 dark:border-gray-600"
-      />
+      <!-- Container to keep icons centered in the 80px width -->
+      <div class="w-20 flex flex-col items-center">
+        <!-- Avatar -->
+        <Image
+          src={avatarImg}
+          alt="Sam Popham"
+          width={48}
+          height={48}
+          loading="eager"
+          class="rounded-full mb-8 border border-gray-300 dark:border-gray-600"
+        />
 
-      <!-- Links -->
-      <a href="/" class="sidebar-link" data-home aria-label="Navigate to home">
-        <i class="fa-solid fa-house" aria-hidden="true"></i>
-        <span>Home</span>
-      </a>
+        <!-- Links -->
+        <a
+          href="/"
+          class="sidebar-link"
+          data-home
+          aria-label="Navigate to home"
+        >
+          <i class="fa-solid fa-house" aria-hidden="true"></i>
+          <span>Home</span>
+        </a>
 
-      <a
-        href="/#skills"
-        class="sidebar-link"
-        aria-label="Navigate to skills section"
-      >
-        <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
-        <span>Skills</span>
-      </a>
+        <a
+          href="/#skills"
+          class="sidebar-link"
+          aria-label="Navigate to skills section"
+        >
+          <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
+          <span>Skills</span>
+        </a>
 
-      <a
-        href="/#contact"
-        class="sidebar-link"
-        aria-label="Navigate to contact section"
-      >
-        <i class="fa-solid fa-envelope" aria-hidden="true"></i>
-        <span>Contact</span>
-      </a>
+        <a
+          href="/#contact"
+          class="sidebar-link"
+          aria-label="Navigate to contact section"
+        >
+          <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+          <span>Contact</span>
+        </a>
 
-      <!-- Projects Section with Dropdown -->
+        <!-- Projects icon only -->
+        <a
+          href="/#projects"
+          class="sidebar-link projects-link"
+          data-projects-link
+          aria-label="Navigate to projects section"
+        >
+          <i class="fa-solid fa-code" aria-hidden="true"></i>
+          <span>Projects</span>
+        </a>
+      </div>
+
+      <!-- Projects tree - outside the w-20 container to use full expanded width -->
       <div
         class="projects-wrapper"
         role="region"
         aria-label="Projects navigation"
       >
-        <div class="nav-row projects-header">
-          <!-- Expandable spine toggle - LEFT SIDE -->
-          <div class="projects-gutter">
-            <button
-              class="projects-line"
-              data-projects-toggle
-              aria-expanded="false"
-              aria-label="Toggle projects list"
-              aria-controls="projects-tree"
-              title="Click to expand/collapse projects"></button>
-          </div>
-
-          <!-- Projects main link - RIGHT SIDE -->
-          <a
-            href="/#projects"
-            class="sidebar-link projects-link"
-            data-projects-link
-            aria-label="Navigate to projects section"
-          >
-            <i class="fa-solid fa-code" aria-hidden="true"></i>
-            <span>Projects</span>
-          </a>
-        </div>
-
-        <!-- Expandable tree of project links -->
         <div
           class="projects-tree"
           id="projects-tree"
@@ -173,12 +168,6 @@ const { title, noParticles = true, projects = [] } = Astro.props;
                 // Extract slug from link (e.g., "/projects/chess" -> "chess")
                 const slug = project.link?.split("/").pop() || "";
 
-                // Create shortened version for display
-                const shortName =
-                  project.title.length > 15
-                    ? project.title.substring(0, 14) + "..."
-                    : project.title;
-
                 return (
                   <a
                     href={project.link}
@@ -188,7 +177,7 @@ const { title, noParticles = true, projects = [] } = Astro.props;
                     aria-label={`View ${project.title} project`}
                     title={project.title}
                   >
-                    {shortName}
+                    {project.title}
                   </a>
                 );
               })
@@ -224,122 +213,82 @@ const { title, noParticles = true, projects = [] } = Astro.props;
     {!noParticles && <script src="/scripts/particles.js" defer />}
 
     <script>
-      // Enhanced projects dropdown functionality
+      // Select DOM elements
       const wrapper = document.querySelector(".projects-wrapper");
-      const toggle = document.querySelector("[data-projects-toggle]");
+      const nav = document.getElementById("main-nav");
       const tree = document.querySelector("#projects-tree");
       const treeItems = document.querySelectorAll(".tree-item");
       const projectsLink = document.querySelector("[data-projects-link]");
-      const projectsLine = document.querySelector(".projects-line");
 
-      // State management
-      let isExpanded = false;
-
-      // Update spine height to match tree
-      function updateSpineHeight() {
-        if (isExpanded && tree) {
-          const treeHeight = tree.scrollHeight;
-          const buttonHeight = 64; // Approximate button height
-          const totalHeight = buttonHeight + treeHeight;
-          projectsLine.style.height = `${totalHeight}px`;
-        } else {
-          projectsLine.style.height = "20px";
-        }
-      }
-
-      // Toggle dropdown
-      function toggleProjects(expand) {
-        if (expand === undefined) {
-          isExpanded = !isExpanded;
-        } else {
-          isExpanded = expand;
-        }
-
-        wrapper.classList.toggle("expanded", isExpanded);
-        toggle.setAttribute("aria-expanded", String(isExpanded));
-
-        // Update spine height after animation starts
-        setTimeout(updateSpineHeight, 50);
-
-        // Save state to sessionStorage
-        sessionStorage.setItem("projectsExpanded", String(isExpanded));
-      }
-
-      // Click handler for toggle button
-      toggle?.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        toggleProjects();
+      // --- HOVER LOGIC ---
+      // Expand nav when hovering over the entire nav element
+      nav?.addEventListener("mouseenter", () => {
+        console.log("Nav mouseenter"); // Debug log
+        nav?.classList.add("nav-expanded");
+        wrapper?.classList.add("expanded");
       });
 
-      // Keyboard support for toggle
-      toggle?.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" || e.key === " ") {
+      nav?.addEventListener("mouseleave", () => {
+        console.log("Nav mouseleave"); // Debug log
+        // Always allow collapse when mouse leaves, even on project pages
+        nav?.classList.remove("nav-expanded");
+        wrapper?.classList.remove("expanded");
+      });
+
+      // --- CLICK LOGIC (Smooth Scroll) ---
+      // Home icon - scroll to top
+      const homeLink = document.querySelector("[data-home]");
+      homeLink?.addEventListener("click", (e) => {
+        if (window.location.pathname === "/") {
           e.preventDefault();
-          toggleProjects();
+          window.scrollTo({
+            behavior: "smooth",
+            top: 0,
+          });
         }
       });
 
-      // Smooth scroll on home page
+      // Projects link - smooth scroll to projects section
       projectsLink?.addEventListener("click", (e) => {
         if (window.location.pathname === "/") {
           e.preventDefault();
           const projectsSection = document.getElementById("projects");
-          if (projectsSection) {
-            projectsSection.scrollIntoView({
-              behavior: "smooth",
-              block: "start",
-            });
-          }
+          projectsSection?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
         }
       });
 
-      // Auto-expand logic
+      // --- INITIALIZATION (Active State) ---
       function initializeProjectsState() {
         const path = window.location.pathname;
-        const savedState = sessionStorage.getItem("projectsExpanded");
 
-        // Auto-expand if on a project page
+        // Check if we are currently viewing a project
         if (path.startsWith("/projects/")) {
-          toggleProjects(true);
-
-          // Highlight active project
+          // Find and highlight the specific active project in the tree
+          // But don't force the nav to stay expanded
           treeItems.forEach((item) => {
             const projectSlug = item.dataset.project;
             if (projectSlug && path.includes(projectSlug)) {
               item.classList.add("active");
-
-              // Ensure it's visible (scroll into view if needed)
-              setTimeout(() => {
-                item.scrollIntoView({
-                  behavior: "smooth",
-                  block: "nearest",
-                });
-              }, 300);
             }
           });
         }
-        // Restore previous state if available
-        else if (savedState === "true") {
-          toggleProjects(true);
-        }
       }
 
-      // Initialize on page load
-      document.addEventListener("DOMContentLoaded", initializeProjectsState);
-
-      // Update spine height on window resize
-      window.addEventListener("resize", () => {
-        if (isExpanded) {
-          updateSpineHeight();
-        }
-      });
-
-      // Handle navigation highlighting
+      // Handle active link highlighting for standard links
       function updateActiveNavLink() {
         const currentPath = window.location.pathname;
         const currentHash = window.location.hash;
 
+        // Only apply scrollspy on the homepage
+        if (currentPath === "/" || currentPath === "/index.html") {
+          // Don't use the hash-based approach, let scrollspy handle it
+          return;
+        }
+
+        // For non-homepage, use the traditional approach
         document.querySelectorAll(".sidebar-link").forEach((link) => {
           const href = link.getAttribute("href");
           if (href === currentPath || href === currentPath + currentHash) {
@@ -350,9 +299,69 @@ const { title, noParticles = true, projects = [] } = Astro.props;
         });
       }
 
-      // Update on navigation
+      // Scrollspy functionality for homepage
+      function updateScrollSpy() {
+        const currentPath = window.location.pathname;
+
+        // Only run scrollspy on homepage
+        if (currentPath !== "/" && currentPath !== "/index.html") {
+          return;
+        }
+
+        const sections = [
+          { id: "home", link: document.querySelector('[href="/"]') },
+          { id: "skills", link: document.querySelector('[href="/#skills"]') },
+          { id: "contact", link: document.querySelector('[href="/#contact"]') },
+          {
+            id: "projects",
+            link: document.querySelector('[href="/#projects"]'),
+          },
+        ];
+
+        // Get scroll position
+        const scrollPosition = window.scrollY + 100; // Offset for better detection
+
+        // Find which section we're in
+        let currentSection = "home"; // Default to home
+
+        for (const section of sections) {
+          if (section.id === "home") continue; // Skip home, it's the default
+
+          const element = document.getElementById(section.id);
+          if (element) {
+            const offsetTop = element.offsetTop;
+            if (scrollPosition >= offsetTop) {
+              currentSection = section.id;
+            }
+          }
+        }
+
+        // Update active states
+        sections.forEach(({ id, link }) => {
+          if (link) {
+            if (id === currentSection) {
+              link.classList.add("text-blue-600", "dark:text-blue-400");
+            } else {
+              link.classList.remove("text-blue-600", "dark:text-blue-400");
+            }
+          }
+        });
+      }
+
+      // Event Listeners for Lifecycle
+      document.addEventListener("DOMContentLoaded", () => {
+        initializeProjectsState();
+        updateActiveNavLink();
+        updateScrollSpy();
+      });
+
       window.addEventListener("hashchange", updateActiveNavLink);
-      window.addEventListener("load", updateActiveNavLink);
+
+      // Add scroll listener for scrollspy
+      window.addEventListener("scroll", updateScrollSpy);
+
+      // Update on resize (section positions might change)
+      window.addEventListener("resize", updateScrollSpy);
     </script>
   </body>
 </html>

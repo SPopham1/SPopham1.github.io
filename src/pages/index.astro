@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import projects from "../data/projects";
 import { Image } from "astro:assets";
 
 import raytracerImg from "../assets/images/raytracer.png";
@@ -39,13 +40,12 @@ const projects = [
     priority: "Medium",
   },
   {
-    title: "WebGL Bezier Curve Visualiser",
-    description:
-      "Interactive real-time Bezier curve rendering using vector mathematics and parametric equations.",
+    title: "WebGL Projects",
+    description: "WebGL rendering of Bezier curves and the Utah teapot",
     image: bezierImg,
-    link: "/projects/bezier",
+    link: "/projects/visual",
     tags: ["WebGL", "Graphics", "Math"],
-    priority: "Low",
+    priority: "Medium",
   },
   {
     title: "Physical Shutoff Alarm App",
