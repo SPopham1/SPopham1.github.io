@@ -242,6 +242,7 @@ nav.nav-expanded .tree-item {
 /* -------------------- */
 
 nav.nav-expanded {
+  overflow-y: auto;
   width: 260px;
 }
 
@@ -262,4 +263,87 @@ nav.nav-expanded {
     transition-duration: 0.01ms !important;
     animation: none !important;
   }
+}
+
+/* ========================================== */
+/* SIDEBAR SCROLLBAR THEME                    */
+/* ========================================== */
+
+#main-nav {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(59, 130, 246, 0.6) transparent;
+}
+
+/* Chrome / Edge / Safari */
+#main-nav::-webkit-scrollbar {
+  width: 8px;
+}
+
+#main-nav::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#main-nav::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    rgba(59, 130, 246, 0.7),
+    rgba(59, 130, 246, 0.4)
+  );
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+  transition: background 0.2s ease;
+}
+
+#main-nav::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(59, 130, 246, 0.9),
+    rgba(59, 130, 246, 0.6)
+  );
+}
+
+#main-nav::-webkit-scrollbar-thumb {
+  opacity: 0;
+}
+
+#main-nav:hover::-webkit-scrollbar-thumb {
+  opacity: 1;
+}
+
+/* ========================================== */
+/* GLOBAL WEBSITE SCROLLBAR                   */
+/* ========================================== */
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(59, 130, 246, 0.6) transparent;
+}
+
+/* Chrome / Edge / Safari */
+html::-webkit-scrollbar {
+  width: 10px;
+}
+
+html::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    rgba(59, 130, 246, 0.7),
+    rgba(59, 130, 246, 0.4)
+  );
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  transition: background 0.2s ease;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(59, 130, 246, 0.9),
+    rgba(59, 130, 246, 0.6)
+  );
 }
