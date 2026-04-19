@@ -223,11 +223,13 @@ const { title, noParticles = true, projects = [] } = Astro.props;
       // --- HOVER LOGIC ---
       // Expand nav when hovering over the entire nav element
       nav?.addEventListener("mouseenter", () => {
+        console.log("Nav mouseenter"); // Debug log
         nav?.classList.add("nav-expanded");
         wrapper?.classList.add("expanded");
       });
 
       nav?.addEventListener("mouseleave", () => {
+        console.log("Nav mouseleave"); // Debug log
         // Always allow collapse when mouse leaves, even on project pages
         nav?.classList.remove("nav-expanded");
         wrapper?.classList.remove("expanded");
